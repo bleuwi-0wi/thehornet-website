@@ -859,7 +859,327 @@
             color: var(--primary);
         }
 
-        /* Products Section */
+        /* ==================== CATEGORY CARDS SECTION ==================== */
+        .category-cards-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--light) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            perspective: 1500px;
+        }
+
+        .category-card {
+            position: relative;
+            height: 450px;
+            border-radius: 25px;
+            overflow: hidden;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            will-change: transform;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), transparent);
+            z-index: 1;
+            transition: opacity 0.4s;
+        }
+
+        .category-card:hover::before {
+            opacity: 0.7;
+        }
+
+        /* Individual Card Gradients */
+        /* Individual Card Gradients & Images */
+        .category-card.panels .category-card-bg,
+        .category-card.products .category-card-bg {
+            background-image: url('images/panels_bg.jpg');
+        }
+
+        .category-card.video .category-card-bg {
+            background-image: url('images/tutorial_bg.png');
+        }
+
+        .category-card.editing .category-card-bg {
+            background-image: url('images/editing_bg.png');
+        }
+
+        .category-card.clothes .category-card-bg {
+            background-image: url('images/clothes_bg.jpg');
+        }
+
+        .category-card.emulators .category-card-bg {
+            background-image: url('images/emulators_bg.jpg');
+        }
+
+        .category-card.community .category-card-bg {
+            background-image: url('images/community_bg.jpg');
+        }
+
+        .category-card.blog .category-card-bg {
+            background-image: url('images/blog_bg.jpg');
+        }
+
+        /* Hide redundant elements since they are built into the images */
+        .category-card-title,
+        .category-card-label,
+        .category-card-icon {
+            display: none !important;
+        }
+
+        .category-card.panels {
+            background: #1a1a1a;
+        }
+
+        .category-card.video {
+            background: #001f3f;
+        }
+
+        .category-card.editing {
+            background: #3d1f00;
+        }
+
+        .category-card.clothes {
+            background: #1f003d;
+        }
+
+        .category-card.emulators {
+            background: #003d3d;
+        }
+
+        .category-card.community {
+            background: #000000;
+        }
+
+        .category-card.blog {
+            background: #001a1a;
+        }
+
+        /* Card Background Image */
+        .category-card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: top center;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            filter: brightness(0.9);
+        }
+
+        .category-card:hover .category-card-bg {
+            transform: scale(1.1) rotate(2deg);
+            filter: brightness(1.1);
+        }
+
+        /* Category Card Content */
+        .category-card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            z-index: 2;
+            transform: translateY(0);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .category-card:hover .category-card-content {
+            transform: translateY(-10px);
+        }
+
+        .category-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            transform: translateX(0);
+            transition: all 0.4s ease;
+        }
+
+        .category-card:hover .category-card-title {
+            transform: translateX(10px);
+            text-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .category-card-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .category-card:hover .category-card-description {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .category-card-icon {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.2);
+            z-index: 2;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .category-card:hover .category-card-icon {
+            transform: rotate(360deg) scale(1.2);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Vertical Text Label */
+        .category-card-label {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            z-index: 2;
+            white-space: nowrap;
+            transition: all 0.4s ease;
+        }
+
+        .category-card:hover .category-card-label {
+            color: rgba(255, 255, 255, 0.9);
+            letter-spacing: 6px;
+        }
+
+        /* 3D Tilt Effect on Hover */
+        .category-card:hover {
+            transform: translateY(-20px) rotateX(5deg) scale(1.02);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 123, 255, 0.4);
+        }
+
+        /* Active/Click Animation */
+        .category-card:active {
+            transform: translateY(-15px) scale(0.98);
+            transition: all 0.1s ease;
+        }
+
+        /* Smooth Touch Animation for Mobile */
+        @media (hover: none) {
+            .category-card:active {
+                transform: scale(0.95);
+            }
+        }
+
+        /* Glow Effect on Card Borders */
+        .category-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg,
+                    transparent 0%,
+                    rgba(255, 255, 255, 0.3) 50%,
+                    transparent 100%);
+            border-radius: 25px;
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: -1;
+        }
+
+        .category-card:hover::after {
+            opacity: 1;
+            animation: borderGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Card Entrance Animation */
+        @keyframes cardEnter {
+            from {
+                opacity: 0;
+                transform: translateY(50px) rotateX(-20deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        .category-card {
+            animation: cardEnter 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) backwards;
+        }
+
+        .category-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .category-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .category-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .category-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        /* Floating Icon Animation Inside Card */
+        @keyframes floatIcon {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(5deg);
+            }
+        }
+
+        .category-card-content .floating-icon {
+            display: inline-block;
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        /* Product Section */
         .products {
             padding: 100px 0;
             background-color: var(--secondary);
@@ -2891,10 +3211,741 @@
             font-weight: 600;
             font-size: 0.9rem;
         }
+
+        /* ==================== VIEW SYSTEM STYLES ==================== */
+        .view-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            padding-top: 100px;
+            min-height: 80vh;
+        }
+
+        .view-section.active {
+            display: block;
+            opacity: 1;
+            animation: viewFadeIn 0.5s ease forwards;
+        }
+
+        @keyframes viewFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .view-header {
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 20px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .breadcrumb span {
+            color: var(--primary);
+            font-weight: bold;
+            cursor: default;
+        }
+
+        .breadcrumb a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: #fff;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            color: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        .view-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .search-box input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 20px 12px 45px;
+            border-radius: 50px;
+            color: #fff;
+            outline: none;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        .filter-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tag {
+            padding: 6px 15px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .filter-tag:hover,
+        .filter-tag.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 255, 243, 0.3);
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .masonry-layout {
+            column-count: 3;
+            column-gap: 25px;
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 25px;
+        }
+
+        @media(max-width: 900px) {
+            .masonry-layout {
+                column-count: 2;
+            }
+        }
+
+        @media(max-width: 600px) {
+            .masonry-layout {
+                column-count: 1;
+            }
+        }
+
+        /* ==================== RESPONSIVE STYLES ==================== */
+        @media (max-width: 1200px) {
+            .category-cards-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .category-cards-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                padding: 0 15px;
+            }
+
+            .category-card {
+                height: 380px;
+            }
+
+            .category-card-title {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            .category-card-icon {
+                font-size: 3rem;
+                top: 20px;
+                right: 20px;
+            }
+
+            .category-card-content {
+                padding: 20px;
+            }
+
+            .category-card-description {
+                font-size: 0.9rem;
+            }
+
+            .category-card-label {
+                font-size: 0.75rem;
+                letter-spacing: 3px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .category-card {
+                height: 350px;
+            }
+
+            .category-card-title {
+                font-size: 1.6rem;
+                letter-spacing: 1.5px;
+            }
+
+            .category-card-icon {
+                font-size: 2.5rem;
+            }
+
+            .category-cards-section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* ==================== HORNET INBOX STYLES ==================== */
+        .inbox-view-container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            height: 700px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            border: 1px solid rgba(0, 123, 255, 0.2);
+            overflow: hidden;
+            margin-top: 30px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .inbox-sidebar {
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .inbox-search {
+            padding: 20px;
+            position: relative;
+        }
+
+        .inbox-search input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .inbox-search i {
+            position: absolute;
+            left: 35px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        .conversation-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .conv-item {
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .conv-item:hover {
+            background: rgba(0, 123, 255, 0.1);
+        }
+
+        .conv-item.active {
+            background: rgba(0, 123, 255, 0.2);
+            border-left: 4px solid var(--primary);
+        }
+
+        .conv-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        .conv-info {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .conv-name-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .conv-name {
+            font-weight: 700;
+            color: white;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .conv-time {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        .conv-snippet {
+            font-size: 0.85rem;
+            color: var(--gray);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .unread-badge {
+            background: var(--primary);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            position: absolute;
+            right: 20px;
+            bottom: 15px;
+        }
+
+        .inbox-main {
+            display: flex;
+            flex-direction: column;
+            background: url('images/hornet_inbox.jpg') center/cover;
+            position: relative;
+        }
+
+        .inbox-main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.9);
+            z-index: 0;
+        }
+
+        .chat-header {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+
+        .chat-user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 1;
+        }
+
+        .msg-bubble {
+            max-width: 70%;
+            padding: 12px 18px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            position: relative;
+            animation: slideInChat 0.3s ease;
+        }
+
+        @keyframes slideInChat {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .msg-sent {
+            align-self: flex-end;
+            background: var(--primary);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .msg-received {
+            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-bottom-left-radius: 4px;
+        }
+
+        .msg-time {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            margin-top: 5px;
+            display: block;
+            text-align: right;
+        }
+
+        .chat-input {
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 15px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            outline: none;
+        }
+
+        .attachment-btn {
+            font-size: 1.2rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .attachment-btn:hover {
+            color: var(--primary);
+        }
+
+        .empty-chat {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            gap: 20px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .empty-chat i {
+            font-size: 5rem;
+            opacity: 0.2;
+        }
+
+        /* Notifications Bell */
+        .notification-icon-wrapper {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .notif-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4757;
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            border: 2px solid #0f172a;
+        }
+
+        /* ==================== ADVANCED CHAT FEATURES ==================== */
+        .msg-actions {
+            position: absolute;
+            right: 0;
+            top: -25px;
+            display: none;
+            gap: 10px;
+            background: rgba(15, 23, 42, 0.9);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--gray);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+        }
+
+        .msg-bubble:hover .msg-actions {
+            display: flex;
+        }
+
+        .msg-action-btn:hover {
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .reactions-bar {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .reaction-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2px 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .reaction-item:hover,
+        .reaction-item.active {
+            background: rgba(0, 123, 255, 0.2);
+            border-color: var(--primary);
+        }
+
+        .poll-container {
+            margin-top: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .poll-option {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .poll-option:hover {
+            background: rgba(0, 123, 255, 0.1);
+        }
+
+        .poll-option.selected {
+            background: var(--primary);
+            color: white;
+        }
+
+        .poll-progress {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .poll-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        .media-preview {
+            max-width: 100%;
+            border-radius: 12px;
+            margin-top: 10px;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .doc-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px;
+            border-radius: 12px;
+            margin-top: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .doc-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .reposted-container {
+            border-left: 2px solid var(--primary);
+            padding-left: 10px;
+            white-space: nowrap;
+        }
+
+        .inbox-tab.active {
+            background: var(--primary);
+            color: black;
+            font-weight: 700;
+        }
+
+        .msg-status {
+            font-size: 0.7rem;
+            margin-left: 5px;
+            opacity: 0.7;
+        }
+
+        .msg-status.seen {
+            color: #3498db;
+        }
+
+        .user-role-badge {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-left: 8px;
+            font-weight: 700;
+        }
+
+        .role-admin {
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+        }
+
+        .role-seller {
+            color: #f1c40f;
+            border: 1px solid #f1c40f;
+        }
+
+        .role-member {
+            color: #2ecc71;
+            border: 1px solid #2ecc71;
+        }
+
+        .chat-options-menu {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .options-dropdown {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            width: 150px;
+            display: none;
+            flex-direction: column;
+            z-index: 100;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .options-dropdown.active {
+            display: flex;
+        }
+
+        .option-item {
+            padding: 10px 15px;
+            font-size: 0.85rem;
+            color: var(--gray);
+            transition: 0.2s;
+        }
+
+        .option-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .option-item.danger {
+            color: #e74c3c;
+        }
+
+        .option-item.danger:hover {
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        @media (max-width: 992px) {
+            .inbox-view-container {
+                grid-template-columns: 80px 1fr;
+            }
+
+            .conv-info,
+            .inbox-search,
+            .conv-time,
+            .inbox-tabs span {
+                display: none;
+            }
+
+            .inbox-tab {
+                padding: 8px;
+            }
+        }
     </style>
 </head>
 
-<body class="light-mode">
+<body class="dark-mode">
     <!-- Animated Geometric Background -->
     <div class="geometric-bg" id="geometricBg"></div>
 
@@ -2952,6 +4003,8 @@
             <nav class="desktop-nav">
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
+                    <li><a href="#" onclick="navigateTo('community'); return false;">Hub</a></li>
+                    <li><a href="#" onclick="navigateTo('blog'); return false;">Insights</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#products">Products</a></li>
                     <li><a href="#contact">Contact</a></li>
@@ -2975,7 +4028,7 @@
 
                 <div class="theme-toggle">
                     <button class="theme-btn" id="themeToggle">
-                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
                     </button>
                 </div>
 
@@ -2984,6 +4037,13 @@
                         <i class="fas fa-shopping-cart"></i>
                     </button>
                     <span class="cart-badge" id="cartBadge">0</span>
+                </div>
+
+                <div class="notification-icon-wrapper" id="inboxIcon" onclick="navigateTo('inbox'); return false;">
+                    <button class="theme-btn">
+                        <i class="fas fa-envelope"></i>
+                    </button>
+                    <span class="notif-badge" id="inboxBadge">3</span>
                 </div>
 
                 <a href="#" class="btn btn-secondary" id="loginBtn">Login</a>
@@ -2995,6 +4055,10 @@
         <div class="mobile-menu" id="mobileMenu">
             <ul class="mobile-nav-links">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#" onclick="navigateTo('community'); return false;">Hub</a></li>
+                <li><a href="#" onclick="navigateTo('inbox'); return false;">Inbox <span
+                            class="badge-new">NEW</span></a></li>
+                <li><a href="#" onclick="navigateTo('blog'); return false;">Insights</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#products">Products</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -3005,61 +4069,708 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <video autoplay muted loop playsinline class="hero-video">
-            <source src="file:///C:/Users/bluewi/Videos/ba" type="video/mp4">
-            <source src="images/ba.mp4" type="video/mp4">
-        </video>
-        <div class="container hero-content">
-            <h1>THE <span>HORNETS</span></h1>
-            <p class="owner">Professional Services by BLUEWI</p>
-            <p>Welcome to THE HORNETS - your premier destination for high-quality digital products and professional
-                services. We combine innovation with excellence to deliver exceptional results.</p>
-            <div class="hero-buttons">
-                <a href="#about" class="btn living-btn" id="mySkillsLivingBtn">
-                    <i class="fas fa-brain"></i> My Skills
-                </a>
+    <!-- Home Element -->
+    <div class="home-view-element">
+        <section class="hero" id="home">
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="file:///C:/Users/bluewi/Videos/ba" type="video/mp4">
+                <source src="images/ba.mp4" type="video/mp4">
+            </video>
+            <div class="container hero-content">
+                <h1>THE <span>HORNETS</span></h1>
+                <p class="owner">Professional Services by BLUEWI</p>
+                <p>Welcome to THE HORNETS - your premier destination for high-quality digital products and professional
+                    services. We combine innovation with excellence to deliver exceptional results.</p>
+                <div class="hero-buttons">
+                    <a href="#about" class="btn living-btn" id="mySkillsLivingBtn">
+                        <i class="fas fa-brain"></i> My Skills
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="container">
+                <h2 class="section-title">About Me & My Skills</h2>
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="images/bluewi_profile.jpg" alt="BLUEWI - The Hornets Owner">
+                    </div>
+                    <div class="about-text">
+                        <h3>Hi, I'm BLUEWI</h3>
+                        <p>I'm a passionate digital creator and entrepreneur with over 8 years of experience in web
+                            development, digital marketing, and product design. My mission is to create high-quality
+                            digital
+                            solutions that help businesses and individuals succeed in the online world.</p>
+                        <p>Through THE HORNETS, I offer a range of premium digital products and services that combine
+                            cutting-edge technology with creative design. Every product is crafted with attention to
+                            detail
+                            and a commitment to excellence.</p>
+
+                        <h3>My Skills</h3>
+                        <div class="skills">
+                            <div class="skill">Web Development</div>
+                            <div class="skill"> C++ Development </div>
+                            <div class="skill">Digital Marketing</div>
+                            <div class="skill">E-commerce</div>
+                            <div class="skill">OWNER OF CTBHM</div>
+                            <div class="skill">Content Creation</div>
+                            <div class="skill">SEO THE HORNETS</div>
+                            <div class="skill">Video Editing</div>
+                            <div class="skill">Social Media Management</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Cards Section -->
+        <section class="category-cards-section" id="categories">
+            <div class="container">
+                <h2 class="section-title">Explore Our Categories</h2>
+                <p
+                    style="text-align: center; max-width: 800px; margin: 0 auto 60px; font-size: 1.1rem; color: var(--gray);">
+                    Discover our premium offerings across different categories. Click on any card to explore that
+                    category
+                    in detail.
+                </p>
+            </div>
+
+            <div class="category-cards-container">
+                <!-- Panels Category Card -->
+                <div class="category-card panels" data-category="panels">
+                    <div class="category-card-bg"></div>
+                    <div class="category-card-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="category-card-label">PANELS</div>
+                    <div class="category-card-content">
+                        <h3 class="category-card-title">
+                            <span class="floating-icon">🖥️</span> PANELS
+                        </h3>
+                        <p class="category-card-description">
+                            Explore our premium digital products, tools, and services designed for excellence and
+                            innovation.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Video Tutorials Category Card -->
+                <div class="category-card video" data-category="videos">
+                    <div class="category-card-bg"></div>
+                    <div class="category-card-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="category-card-label">TUTORIALS</div>
+                    <div class="category-card-content">
+                        <h3 class="category-card-title">
+                            <span class="floating-icon">🎬</span> TUTORIALS
+                        </h3>
+                        <p class="category-card-description">
+                            Watch detailed video tutorials and explanations showcasing our products and services in
+                            action.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Editing Category Card -->
+                <div class="category-card editing" data-category="editing">
+                    <div class="category-card-bg"></div>
+                    <div class="category-card-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <div class="category-card-label">EDITING</div>
+                    <div class="category-card-content">
+                        <h3 class="category-card-title">
+                            <span class="floating-icon">✂️</span> EDITING
+                        </h3>
+                        <p class="category-card-description">
+                            Professional video editing services and templates for creating stunning visual content.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Clothes (CTBHM) Category Card -->
+                <div class="category-card clothes" data-category="clothes">
+                    <div class="category-card-bg"></div>
+                    <div class="category-card-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <div class="category-card-label">CTBHM</div>
+                    <div class="category-card-content">
+                        <h3 class="category-card-title">
+                            <span class="floating-icon">👕</span> CLOTHES
+                        </h3>
+                        <p class="category-card-description">
+                            Exclusive CTBHM branded clothing and merchandise with premium quality and unique designs.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Emulators Category Card -->
+                <div class="category-card emulators" data-category="emulators">
+                    <div class="category-card-bg"></div>
+                    <div class="category-card-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <div class="category-card-label">EMULATORS</div>
+                    <div class="category-card-content">
+                        <h3 class="category-card-title">
+                            <span class="floating-icon">🎮</span> EMULUTORS
+                        </h3>
+                        <p class="category-card-description">
+                            Get the best emulators optimized for maximum performance and smooth gaming experience.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Community / Hub Category Card -->
+                <div class="category-card community" data-category="community">
+                    <div class="category-card-bg"></div>
+                    <div class="category-card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="category-card-label">COMMUNITY</div>
+                    <div class="category-card-content">
+                        <h3 class="category-card-title">
+                            <span class="floating-icon">🌐</span> COMMUNITY
+                        </h3>
+                        <p class="category-card-description">
+                            Join our vibrant community. Access Discord, Telegram, announcements, and exclusive drops.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Blog / Insights Category Card -->
+                <div class="category-card blog" data-category="blog">
+                    <div class="category-card-bg"></div>
+                    <div class="category-card-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="category-card-label">INSIGHTS</div>
+                    <div class="category-card-content">
+                        <h3 class="category-card-title">
+                            <span class="floating-icon">💡</span> INSIGHTS
+                        </h3>
+                        <p class="category-card-description">
+                            Real experiences, behind-the-scenes stories, and expert tips on business and growth.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Hornet Social Category Card -->
+                <div class="category-card social" data-category="inbox">
+                    <div class="category-card-bg" style="background-image: url('images/hornet_inbox_social.jpg');">
+                    </div>
+                    <div class="category-card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="category-card-label">SOCIAL HUB</div>
+                    <div class="category-card-content">
+                        <h3 class="category-card-title">
+                            <span class="floating-icon">🌐</span> SOCIAL HUB
+                        </h3>
+                        <p class="category-card-description">
+                            Engage with THE HORNETS. Send messages, videos, documents, and vote in community polls.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div> <!-- End Home Element -->
+
+    <!-- ==================== VIEW SECTIONS ==================== -->
+
+    <!-- PANELS VIEW -->
+    <div id="view-panels" class="view-section">
+        <div class="container">
+            <div class="view-header">
+                <div class="breadcrumb">
+                    <a href="#" onclick="navigateTo('home'); return false;">Home</a>
+                    <span>/</span>
+                    <span>Panels</span>
+                </div>
+                <h2 class="section-title">Premium Panels</h2>
+            </div>
+            <div class="view-controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search panels..." onkeyup="filterProducts(this.value, 'panels')">
+                </div>
+            </div>
+            <div class="grid-layout" id="panels-grid"></div>
+        </div>
+    </div>
+
+    <!-- VIDEO TUTORIALS VIEW -->
+    <div id="view-videos" class="view-section">
+        <div class="container">
+            <div class="view-header">
+                <div class="breadcrumb">
+                    <a href="#" onclick="navigateTo('home'); return false;">Home</a>
+                    <span>/</span>
+                    <span>Video Tutorials</span>
+                </div>
+                <h2 class="section-title">Video Tutorials</h2>
+            </div>
+            <div class="view-controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search tutorials...">
+                </div>
+
+            </div>
+            <div class="grid-layout" id="videos-grid"></div>
+        </div>
+    </div>
+
+    <!-- CLOTHES VIEW -->
+    <div id="view-clothes" class="view-section">
+        <div class="container">
+            <div class="view-header">
+                <div class="breadcrumb">
+                    <a href="#" onclick="navigateTo('home'); return false;">Home</a>
+                    <span>/</span>
+                    <span>Clothes (CTBHM)</span>
+                </div>
+                <h2 class="section-title">CTBHM Collection</h2>
+            </div>
+            <div class="view-controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search clothes...">
+                </div>
+            </div>
+            <div class="grid-layout" id="clothes-grid">
+                <div style="grid-column: 1/-1; text-align: center; padding: 50px; opacity: 0.7;">
+                    <i class="fas fa-tshirt" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                    <h3>New Collection Coming Soon</h3>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- About Section -->
-    <section class="about" id="about">
+    <!-- EDITING TOOLS VIEW -->
+    <div id="view-editing" class="view-section">
         <div class="container">
-            <h2 class="section-title">About Me & My Skills</h2>
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="images/bluewi_profile.jpg" alt="BLUEWI - The Hornets Owner">
+            <div class="view-header">
+                <div class="breadcrumb">
+                    <a href="#" onclick="navigateTo('home'); return false;">Home</a>
+                    <span>/</span>
+                    <span>Editing Tools</span>
                 </div>
-                <div class="about-text">
-                    <h3>Hi, I'm BLUEWI</h3>
-                    <p>I'm a passionate digital creator and entrepreneur with over 8 years of experience in web
-                        development, digital marketing, and product design. My mission is to create high-quality digital
-                        solutions that help businesses and individuals succeed in the online world.</p>
-                    <p>Through THE HORNETS, I offer a range of premium digital products and services that combine
-                        cutting-edge technology with creative design. Every product is crafted with attention to detail
-                        and a commitment to excellence.</p>
+                <h2 class="section-title">Editing Resources</h2>
+            </div>
+            <div class="view-controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search tools...">
+                </div>
+            </div>
+            <div class="grid-layout" id="editing-grid">
+                <div style="grid-column: 1/-1; text-align: center; padding: 50px; opacity: 0.7;">
+                    <i class="fas fa-tools" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                    <h3>Tools Library Updating...</h3>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                    <h3>My Skills</h3>
-                    <div class="skills">
-                        <div class="skill">Web Development</div>
-                        <div class="skill"> C++ Development </div>
-                        <div class="skill">Digital Marketing</div>
-                        <div class="skill">E-commerce</div>
-                        <div class="skill">OWNER OF CTBHM</div>
-                        <div class="skill">Content Creation</div>
-                        <div class="skill">SEO THE HORNETS</div>
-                        <div class="skill">Video Editing</div>
-                        <div class="skill">Social Media Management</div>
+    <!-- EMULATORS VIEW -->
+    <div id="view-emulators" class="view-section">
+        <div class="container">
+            <div class="view-header">
+                <div class="breadcrumb">
+                    <a href="#" onclick="navigateTo('home'); return false;">Home</a>
+                    <span>/</span>
+                    <span>Emulators</span>
+                </div>
+                <h2 class="section-title">Optimized Emulators</h2>
+            </div>
+            <div class="view-controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search emulators..."
+                        onkeyup="filterProducts(this.value, 'emulators')">
+                </div>
+            </div>
+            <div class="grid-layout" id="emulators-grid"></div>
+        </div>
+    </div>
+
+    <!-- COMMUNITY / HUB VIEW -->
+    <div id="view-community" class="view-section">
+        <div class="container">
+            <div class="view-header">
+                <div class="breadcrumb">
+                    <a href="#" onclick="navigateTo('home'); return false;">Home</a>
+                    <span>/</span>
+                    <span>Community / Hub</span>
+                </div>
+                <h2 class="section-title">Hornet Community Hub</h2>
+            </div>
+
+            <div class="community-grid"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">
+                <!-- Discord -->
+                <div class="community-card"
+                    style="background: rgba(88, 101, 242, 0.1); border: 1px solid rgba(88, 101, 242, 0.3); border-radius: 20px; padding: 40px; text-align: center; transition: all 0.4s ease; cursor: pointer;"
+                    onmouseover="this.style.transform='translateY(-10px)'"
+                    onmouseout="this.style.transform='translateY(0)'">
+                    <div
+                        style="width: 80px; height: 80px; background: #5865F2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2.5rem; color: white; box-shadow: 0 0 20px rgba(88, 101, 242, 0.4);">
+                        <i class="fab fa-discord"></i>
+                    </div>
+                    <h3 style="font-family: 'Orbitron', sans-serif; color: white; margin-bottom: 15px;">Discord Server
+                    </h3>
+                    <p style="color: var(--gray); margin-bottom: 25px;">Join our official Discord server for real-time
+                        support, networking, and exclusive roles.</p>
+                    <a href="https://discord.gg/ATcbND8nnv" target="_blank" class="btn btn-primary"
+                        style="background: #5865F2; border-color: #5865F2; width: 100%;">Join Server</a>
+                </div>
+
+                <!-- Telegram -->
+                <div class="community-card"
+                    style="background: rgba(0, 136, 204, 0.1); border: 1px solid rgba(0, 136, 204, 0.3); border-radius: 20px; padding: 40px; text-align: center; transition: all 0.4s ease; cursor: pointer;"
+                    onmouseover="this.style.transform='translateY(-10px)'"
+                    onmouseout="this.style.transform='translateY(0)'">
+                    <div
+                        style="width: 80px; height: 80px; background: #0088cc; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2.5rem; color: white; box-shadow: 0 0 20px rgba(0, 136, 204, 0.4);">
+                        <i class="fab fa-telegram-plane"></i>
+                    </div>
+                    <h3 style="font-family: 'Orbitron', sans-serif; color: white; margin-bottom: 15px;">Telegram Channel
+                    </h3>
+                    <p style="color: var(--gray); margin-bottom: 25px;">Stay updated with our latest announcements,
+                        news, and instant product updates.</p>
+                    <a href="https://t.me/+cmLReZmS8fphMDY0" target="_blank" class="btn btn-primary"
+                        style="background: #0088cc; border-color: #0088cc; width: 100%;">Join Channel</a>
+                </div>
+
+                <!-- Exclusive Drops -->
+                <div class="community-card"
+                    style="background: rgba(255, 71, 87, 0.1); border: 1px solid rgba(255, 71, 87, 0.3); border-radius: 20px; padding: 40px; text-align: center; transition: all 0.4s ease; cursor: pointer;"
+                    onmouseover="this.style.transform='translateY(-10px)'"
+                    onmouseout="this.style.transform='translateY(0)'">
+                    <div
+                        style="width: 80px; height: 80px; background: #ff4757; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2.5rem; color: white; box-shadow: 0 0 20px rgba(255, 71, 87, 0.4);">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 style="font-family: 'Orbitron', sans-serif; color: white; margin-bottom: 15px;">Exclusive Drops
+                    </h3>
+                    <p style="color: var(--gray); margin-bottom: 25px;">Get access to limited edition clothes, panels,
+                        and exclusive digital assets.</p>
+                    <a href="#" onclick="navigateTo('clothes'); return false;" class="btn btn-primary"
+                        style="background: #ff4757; border-color: #ff4757; width: 100%;">Explore Drops</a>
+                </div>
+
+                <!-- Announcements -->
+                <div class="community-card"
+                    style="background: rgba(46, 213, 115, 0.1); border: 1px solid rgba(46, 213, 115, 0.3); border-radius: 20px; padding: 40px; text-align: center; transition: all 0.4s ease; cursor: pointer;"
+                    onmouseover="this.style.transform='translateY(-10px)'"
+                    onmouseout="this.style.transform='translateY(0)'" onclick="navigateTo('updates')">
+                    <div
+                        style="width: 80px; height: 80px; background: #2ed573; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2.5rem; color: white; box-shadow: 0 0 20px rgba(46, 213, 115, 0.4);">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 style="font-family: 'Orbitron', sans-serif; color: white; margin-bottom: 15px;">Announcements
+                    </h3>
+                    <p style="color: var(--gray); margin-bottom: 25px;">Never miss an update. Check out our latest
+                        project milestones and community news.</p>
+                    <a href="#" onclick="navigateTo('updates'); return false;" class="btn btn-primary"
+                        style="background: #2ed573; border-color: #2ed573; width: 100%;">Read Updates</a>
+                </div>
+
+                <!-- Hornet Inbox -->
+                <div class="community-card"
+                    style="background: rgba(0, 123, 255, 0.1); border: 1px solid rgba(0, 123, 255, 0.3); border-radius: 20px; padding: 40px; text-align: center; transition: all 0.4s ease; cursor: pointer;"
+                    onmouseover="this.style.transform='translateY(-10px)'"
+                    onmouseout="this.style.transform='translateY(0)'" onclick="navigateTo('inbox')">
+                    <div
+                        style="width: 80px; height: 80px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2.5rem; color: white; box-shadow: 0 0 20px rgba(0, 123, 255, 0.4);">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <h3 style="font-family: 'Orbitron', sans-serif; color: white; margin-bottom: 15px;">Hornet Inbox
+                    </h3>
+                    <p style="color: var(--gray); margin-bottom: 25px;">Connect with other members and admins directly.
+                        Secure, private, and fast communication.</p>
+                    <a href="#" onclick="navigateTo('inbox'); return false;" class="btn btn-primary"
+                        style="background: var(--primary); border-color: var(--primary); width: 100%;">Open Inbox</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- UPDATES / ANNOUNCEMENTS VIEW -->
+    <div id="view-updates" class="view-section">
+        <div class="container">
+            <div class="view-header">
+                <div class="breadcrumb">
+                    <a href="#" onclick="navigateTo('home'); return false;">Home</a>
+                    <span>/</span>
+                    <a href="#" onclick="navigateTo('community'); return false;">Hub</a>
+                    <span>/</span>
+                    <span>Announcements</span>
+                </div>
+                <h2 class="section-title">Latest Updates</h2>
+                <p style="color: var(--gray); margin-top: 10px;">Stay informed with the newest project developments and
+                    community milestones.</p>
+            </div>
+
+            <div class="updates-timeline"
+                style="margin-top: 50px; position: relative; padding-left: 30px; border-left: 2px solid var(--primary);">
+                <!-- Update 1 -->
+                <div class="update-item" style="margin-bottom: 40px; position: relative;">
+                    <div
+                        style="position: absolute; left: -41px; top: 0; width: 20px; height: 20px; background: var(--primary); border-radius: 50%; border: 4px solid #0f172a;">
+                    </div>
+                    <div
+                        style="background: rgba(255,255,255,0.03); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                            <h3 style="color: var(--primary); font-family: 'Outfit', sans-serif;">New Website Section:
+                                Insights / Blog</h3>
+                            <span style="font-size: 0.8rem; opacity: 0.5;">Dec 22, 2023</span>
+                        </div>
+                        <p style="color: var(--gray); line-height: 1.6;">We have officially launched the Insights
+                            section! Explore growth stories, business tips, and professional editing secrets from the
+                            founder Amin and Karim.</p>
+                    </div>
+                </div>
+
+                <!-- Update 2 -->
+                <div class="update-item" style="margin-bottom: 40px; position: relative;">
+                    <div
+                        style="position: absolute; left: -41px; top: 0; width: 20px; height: 20px; background: var(--primary); border-radius: 50%; border: 4px solid #0f172a;">
+                    </div>
+                    <div
+                        style="background: rgba(255,255,255,0.03); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                            <h3 style="color: var(--primary); font-family: 'Outfit', sans-serif;">Community Hub Upgraded
+                            </h3>
+                            <span style="font-size: 0.8rem; opacity: 0.5;">Dec 20, 2023</span>
+                        </div>
+                        <p style="color: var(--gray); line-height: 1.6;">Our community hub links have been updated. Join
+                            our revamped Discord server and stay tuned for exclusive drops!</p>
+                    </div>
+                </div>
+
+                <!-- Update 3 -->
+                <div class="update-item" style="margin-bottom: 40px; position: relative;">
+                    <div
+                        style="position: absolute; left: -41px; top: 0; width: 20px; height: 20px; background: var(--primary); border-radius: 50%; border: 4px solid #0f172a;">
+                    </div>
+                    <div
+                        style="background: rgba(255,255,255,0.03); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                            <h3 style="color: var(--primary); font-family: 'Outfit', sans-serif;">Security System V1.0
+                            </h3>
+                            <span style="font-size: 0.8rem; opacity: 0.5;">Dec 15, 2023</span>
+                        </div>
+                        <p style="color: var(--gray); line-height: 1.6;">Enhanced security protocols implemented to
+                            protect digital assets and user data. Authorized members now have access to premium sectors.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Products & Videos Section -->
-    <section class="products" id="products">
+    <!-- BLOG / INSIGHTS VIEW -->
+    <div id="view-blog" class="view-section">
+        <div class="container">
+            <div class="view-header">
+                <div class="breadcrumb">
+                    <a href="#" onclick="navigateTo('home'); return false;">Home</a>
+                    <span>/</span>
+                    <span>Insights / Blog</span>
+                </div>
+                <h2 class="section-title">Behind The Scenes</h2>
+                <p style="color: var(--gray); margin-top: 10px;">Real experiences and growth stories from the world of
+                    THE HORNETS.</p>
+            </div>
+
+            <div class="blog-grid"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 50px;">
+                <!-- Article 1: CTBHM -->
+                <div class="insight-card"
+                    style="background: rgba(255,255,255,0.03); border-radius: 25px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s ease;">
+                    <div
+                        style="height: 200px; background: url('images/clothes_bg.jpg') center/cover; position: relative;">
+                        <div
+                            style="position: absolute; bottom: 15px; left: 15px; background: var(--primary); color: black; padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 0.8rem;">
+                            GROWTH STORY</div>
+                    </div>
+                    <div style="padding: 30px;">
+                        <h3 style="color: white; margin-bottom: 15px; font-size: 1.4rem;">How I Built CTBHM: From Vision
+                            to Reality</h3>
+                        <p style="color: var(--gray); line-height: 1.6; margin-bottom: 25px;">The journey of creating a
+                            premium clothing brand and the lessons learned along the way.</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.8rem; opacity: 0.5;"><i class="far fa-calendar-alt"></i> Dec 20,
+                                2023</span>
+                            <a href="#" onclick="openBlogArticle('ctbhm'); return false;"
+                                class="btn btn-secondary btn-sm" style="padding: 8px 20px;">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article 2: Panel Business -->
+                <div class="insight-card"
+                    style="background: rgba(255,255,255,0.03); border-radius: 25px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s ease;">
+                    <div
+                        style="height: 200px; background: url('images/panels_bg.jpg') center/cover; position: relative;">
+                        <div
+                            style="position: absolute; bottom: 15px; left: 15px; background: #00ff00; color: black; padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 0.8rem;">
+                            BUSINESS TIPS</div>
+                    </div>
+                    <div style="padding: 30px;">
+                        <h3 style="color: white; margin-bottom: 15px; font-size: 1.4rem;">Panel Business: Expert Tips
+                            for Newcomers</h3>
+                        <p style="color: var(--gray); line-height: 1.6; margin-bottom: 25px;">Everything you need to
+                            know about managing and scaling your own digital panel services.</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.8rem; opacity: 0.5;"><i class="far fa-calendar-alt"></i> Dec 15,
+                                2023</span>
+                            <a href="#" onclick="openBlogArticle('panels'); return false;"
+                                class="btn btn-secondary btn-sm" style="padding: 8px 20px;">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article 3: Editing Secrets -->
+                <div class="insight-card"
+                    style="background: rgba(255,255,255,0.03); border-radius: 25px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s ease;">
+                    <div
+                        style="height: 200px; background: url('images/editing_bg.png') center/cover; position: relative;">
+                        <div
+                            style="position: absolute; bottom: 15px; left: 15px; background: #ff00ff; color: black; padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 0.8rem;">
+                            BEHIND THE SCENES</div>
+                    </div>
+                    <div style="padding: 30px;">
+                        <h3 style="color: white; margin-bottom: 15px; font-size: 1.4rem;">Editing Secrets: The Pro
+                            Workflow</h3>
+                        <p style="color: var(--gray); line-height: 1.6; margin-bottom: 25px;">A deep dive into the
+                            editing techniques that make our visuals stand out from the crowd.</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.8rem; opacity: 0.5;"><i class="far fa-calendar-alt"></i> Dec 10,
+                                2023</span>
+                            <a href="#" onclick="openBlogArticle('editing'); return false;"
+                                class="btn btn-secondary btn-sm" style="padding: 8px 20px;">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HORNET INBOX VIEW -->
+    <div id="view-inbox" class="view-section">
+        <div class="container">
+            <div class="view-header">
+                <div class="breadcrumb">
+                    <a href="#" onclick="navigateTo('home'); return false;">Home</a>
+                    <span>/</span>
+                    <span>Hornet Inbox</span>
+                </div>
+                <h2 class="section-title">Hornet Inbox</h2>
+                <p style="text-align: center; color: var(--gray);">Direct messaging and secure group rooms.</p>
+            </div>
+
+            <div class="inbox-view-container">
+                <!-- Sidebar -->
+                <div class="inbox-sidebar">
+                    <div class="inbox-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search people/groups..." id="inboxSearch"
+                            onkeyup="searchInbox()">
+                    </div>
+                    <div class="inbox-tabs">
+                        <div class="inbox-tab active" onclick="switchInboxTab('all', this)">All</div>
+                        <div class="inbox-tab" onclick="switchInboxTab('direct', this)">Direct</div>
+                        <div class="inbox-tab" onclick="switchInboxTab('group', this)">Groups</div>
+                        <div class="inbox-tab" onclick="switchInboxTab('request', this)">Requests</div>
+                    </div>
+                    <div class="conversation-list" id="conversationList">
+                        <!-- Conversations populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Main Chat Area -->
+                <div class="inbox-main" id="chatWindow">
+                    <div class="empty-chat" id="emptyChat">
+                        <i class="fas fa-comments"></i>
+                        <h3>Your Messages</h3>
+                        <p>Select a conversation to start chatting.</p>
+                        <button class="btn btn-primary btn-sm" onclick="startNewChat()">New Message</button>
+                    </div>
+
+                    <!-- Active Chat (Hidden by default) -->
+                    <div id="activeChat" style="display: none; height: 100%; flex-direction: column;">
+                        <div class="chat-header">
+                            <div class="chat-user-info">
+                                <img src="" alt="" class="conv-avatar" id="activeChatAvatar">
+                                <div>
+                                    <div style="display: flex; align-items: center;">
+                                        <h4 id="activeChatName" style="color: white; margin: 0;"></h4>
+                                        <span id="activeChatRole" class="user-role-badge"></span>
+                                    </div>
+                                    <span id="activeChatStatus" style="font-size: 0.8rem; color: #2ecc71;">
+                                        <i class="fas fa-circle" style="font-size: 0.6rem;"></i> Online
+                                    </span>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 15px; color: var(--gray); align-items: center;">
+                                <i class="fas fa-phone-alt" style="cursor: pointer;" title="Voice Call"
+                                    onclick="showToast('Voice call coming soon', 'info')"></i>
+                                <i class="fas fa-video" style="cursor: pointer;" title="Video Call"
+                                    onclick="showToast('Video call coming soon', 'info')"></i>
+                                <div class="chat-options-menu" onclick="toggleChatOptions()">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                    <div class="options-dropdown" id="chatOptionsDropdown">
+                                        <div class="option-item" onclick="showToast('User reported', 'info')">Report
+                                            User</div>
+                                        <div class="option-item danger" onclick="showToast('User blocked', 'error')">
+                                            Block User</div>
+                                        <div class="option-item" onclick="showToast('Muted notifications', 'info')">Mute
+                                            Chat</div>
+                                        <div class="option-item" onclick="showToast('Cleared history', 'info')">Clear
+                                            History</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chat-messages" id="chatMessages">
+                            <!-- Messages populated by JS -->
+                        </div>
+
+                        <!-- Typing area with more features -->
+                        <div class="chat-input-toolbar"
+                            style="display: flex; gap: 20px; padding: 10px 25px; background: rgba(0,0,0,0.2); border-top: 1px solid rgba(255,255,255,0.05);">
+                            <i class="fas fa-image attachment-btn" title="Send Image"
+                                onclick="simulateFileUpload('image')"></i>
+                            <i class="fas fa-video attachment-btn" title="Send Video"
+                                onclick="simulateFileUpload('video')"></i>
+                            <i class="fas fa-file-alt attachment-btn" title="Send Document"
+                                onclick="simulateFileUpload('document')"></i>
+                            <i class="fas fa-poll attachment-btn" title="Create Poll" onclick="showPollCreator()"></i>
+                        </div>
+                        <div class="chat-input" style="padding-top: 10px;">
+                            <input type="text" placeholder="Type a message..." id="messageInput">
+                            <i class="fas fa-smile attachment-btn" onclick="toggleEmojiPicker()"></i>
+                            <button class="btn btn-primary" style="padding: 10px 20px;" onclick="sendMessage()">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="products" id="products" style="display:none;">
         <div class="container">
             <h2 class="section-title">Gameplay Highlights & Skills Showcase</h2>
 
@@ -3341,6 +5052,21 @@
         </div>
     </div>
 
+    <!-- Blog Detail Modal -->
+    <div class="modal blog-modal" id="blogModal">
+        <div class="modal-content"
+            style="max-width: 900px; padding: 0; overflow: hidden; border-radius: 30px; background: #0f172a; border: 1px solid rgba(255,255,255,0.1);">
+            <span class="close-modal" id="closeBlogModal"
+                style="z-index: 1001; top: 20px; right: 20px; background: rgba(0,0,0,0.5); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer;">&times;</span>
+            <div id="blogDetailLoading" style="padding: 100px; text-align: center; color: var(--primary);">
+                <i class="fas fa-spinner fa-spin" style="font-size: 3rem;"></i>
+            </div>
+            <div id="blogDetailContent" style="display: none; max-height: 85vh; overflow-y: auto;">
+                <!-- Content generated by JS -->
+            </div>
+        </div>
+    </div>
+
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
@@ -3509,6 +5235,7 @@
             en: {
                 // Header
                 home: "Home",
+                inbox: "Inbox",
                 about: "About",
                 products: "Products",
                 contact: "Contact",
@@ -3611,6 +5338,7 @@
             ar: {
                 // Header
                 home: "الرئيسية",
+                inbox: "البريد الوارد",
                 about: "عن",
                 products: "المنتجات",
                 contact: "اتصل",
@@ -3713,6 +5441,7 @@
             fr: {
                 // Header
                 home: "Accueil",
+                inbox: "Boîte de réception",
                 about: "À propos",
                 products: "Produits",
                 contact: "Contact",
@@ -3815,6 +5544,7 @@
             es: {
                 // Header
                 home: "Inicio",
+                inbox: "Bandeja de entrada",
                 about: "Acerca de",
                 products: "Productos",
                 contact: "Contacto",
@@ -3917,6 +5647,7 @@
             pt: {
                 // Header
                 home: "Início",
+                inbox: "Caixa de Entrada",
                 about: "Sobre",
                 products: "Produtos",
                 contact: "Contato",
@@ -4040,6 +5771,9 @@
                 else if (href === '#products') link.textContent = t('products');
                 else if (href === '#contact') link.textContent = t('contact');
                 else if (link.id.includes('support')) link.textContent = t('support');
+                else if (link.getAttribute('onclick') && link.getAttribute('onclick').includes('inbox')) {
+                    link.innerHTML = `${t('inbox')} <span class="badge-new">NEW</span>`;
+                }
             });
 
             // Update buttons
@@ -4358,11 +6092,13 @@
                 icon.classList.add('fa-sun');
                 document.body.classList.remove('light-mode');
                 showToast('Dark mode enabled', 'info');
+                localStorage.setItem('hornets_theme', 'dark');
             } else {
                 icon.classList.remove('fa-sun');
                 icon.classList.add('fa-moon');
                 document.body.classList.add('light-mode');
                 showToast('Light mode enabled', 'info');
+                localStorage.setItem('hornets_theme', 'light');
             }
         });
 
@@ -4539,10 +6275,19 @@
             window.scrollTo(0, 0);
         });
 
-        // Handle navigation links when support page is open
+        // Handle navigation links (Header / General)
         document.querySelectorAll('a[href^="#"]:not(#supportLink):not(#supportLinkMobile):not(#supportLinkFooter)').forEach(link => {
             link.addEventListener('click', (e) => {
                 const href = link.getAttribute('href');
+
+                // Unified Navigation Handling
+                if (href === '#home') {
+                    e.preventDefault();
+                    if (typeof navigateTo === 'function') navigateTo('home');
+                    if (supportPage) supportPage.classList.remove('active');
+                    return;
+                }
+
                 if (href && href !== '#' && supportPage.classList.contains('active')) {
                     e.preventDefault();
                     // Close support page first
@@ -4567,11 +6312,14 @@
             });
         });
 
+        let isLoggedIn = false;
+
         // Product Data
         const products = [
             {
                 id: 1,
                 name: "BLUEWI 7 Days",
+                category: "panels",
                 description: "Full access for one week. Perfect for testing.",
                 fullDescription: "Get complete access to all BLUEWI features for 7 days. This is the perfect choice for users who want to experience the power of the platform before committing to a longer term. Includes all basic tools and initial setup guide.",
                 price: "$5",
@@ -4581,6 +6329,7 @@
             {
                 id: 2,
                 name: "BLUEWI 30 Days",
+                category: "panels",
                 description: "Standard monthly access. Great value.",
                 fullDescription: "Enjoy uninterrupted access for a full 30 days. This package is our most popular option, offering a perfect balance of value and flexibility. Includes priority update delivery during the subscription period.",
                 price: "$10",
@@ -4590,6 +6339,7 @@
             {
                 id: 3,
                 name: "BLUEWI 60 Days",
+                category: "panels",
                 description: "Extended access for two months.",
                 fullDescription: "Save money with our 60-day package. You get two full months of premium access, ensuring you stay on top of your game for longer. Includes all premium features and specialized support assistance.",
                 price: "$20",
@@ -4599,6 +6349,7 @@
             {
                 id: 4,
                 name: "BLUEWI Lifetime",
+                category: "panels",
                 description: "Unlimited access forever. Best choice.",
                 fullDescription: "Pay once, own it forever. The Lifetime package grants you permanent access to BLUEWI with no recurring fees. You'll receive all future updates, new feature releases, and VIP status in our community.",
                 price: "$35",
@@ -4608,11 +6359,53 @@
             {
                 id: 5,
                 name: "BLUEWI VIP Bundle",
+                category: "panels",
                 description: "Lifetime + Premium Support + Extras.",
                 fullDescription: "The ultimate BLUEWI experience. Includes Lifetime access, direct developer support line, early access to beta features, and exclusive custom profile customization options. The premium choice for serious users.",
                 price: "$40",
                 image: "images/products/product1.png",
                 likes: 1205
+            },
+            // Editing Category Items
+            {
+                id: 6,
+                name: "Hornet Panel Design",
+                category: "editing",
+                description: "Premium Anti-Ban Panel UI Design.",
+                fullDescription: "A professional and sleek UI design for the Hornet Anti-Ban Panel. Features a modern dark theme with vibrant accents.",
+                price: "Contact",
+                image: "images/editing/hornet_panel.jpg",
+                likes: 245
+            },
+            {
+                id: 7,
+                name: "Character Art Pack",
+                category: "editing",
+                description: "Custom 3D character illustrations.",
+                fullDescription: "High-quality 3D character renders suitable for banners, thumbnails, and branding. Includes source files.",
+                price: "$25",
+                image: "images/editing/characters_group.jpg",
+                likes: 189
+            },
+            {
+                id: 8,
+                name: "Streamer Setup Bundle",
+                category: "editing",
+                description: "Complete overlay package for streamers.",
+                fullDescription: "Includes animated overlays, alerts, and webcam frames. Perfect for Twitch and YouTube streamers.",
+                price: "$30",
+                image: "images/editing/streamer_setup.jpg",
+                likes: 312
+            },
+            {
+                id: 9,
+                name: "Thumbnail Mastery",
+                category: "editing",
+                description: "Professional YouTube thumbnail templates.",
+                fullDescription: "Boost your click-through rate with these high-contrast, eye-catching thumbnail designs. Easy to edit PSDs.",
+                price: "$15",
+                image: "images/editing/clutch_god.jpg",
+                likes: 567
             },
             {
                 id: 10,
@@ -4646,6 +6439,7 @@
             }
         ];
 
+
         // Global Reviews Storage
         const productReviews = {
             1: [{ user: "GhostNinja", stars: 5, comment: "Works perfectly for trial!" }],
@@ -4659,35 +6453,288 @@
 
 
         // Product Videos Data
-        const productVideos = [
+        window.productVideos = [
             {
                 id: 1,
-                title: "BLUEWI 7 Days - Quick Start Guide",
-                productName: "BLUEWI 7 Days",
-                thumbnail: "images/products/product5.png",
-                videoEmbed: '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/uZwX6KtgoiU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+                type: 'youtube',
+                title: "From Legend to Downfall: Blue Hornet vs the Cheating Virus",
+                productName: "Blue Hornet Story",
+                thumbnail: "https://img.youtube.com/vi/6Qhr6NiIUHc/maxresdefault.jpg",
+                videoEmbed: '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/6Qhr6NiIUHc?si=7D5911tMOAEfzvqM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
             },
             {
                 id: 2,
-                title: "Mastering BLUEWI 30 Days Features",
-                productName: "BLUEWI 30 Days",
-                thumbnail: "images/products/product2.png",
-                videoEmbed: '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/XUy-pnzT1m4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+                type: 'youtube',
+                title: "JNIYEN X CHEAT: Ultimate Free Fire Panel Hack OB50",
+                productName: "Tutorial",
+                thumbnail: "https://img.youtube.com/vi/Nx0jSwmKV4g/maxresdefault.jpg",
+                videoEmbed: '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/Nx0jSwmKV4g?si=Anx5tChg5s7eHhOW" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
             },
             {
                 id: 3,
-                title: "How to use BLUEWI Lifetime",
-                productName: "BLUEWI Lifetime",
-                thumbnail: "images/products/product4.png",
-                videoEmbed: '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/XUy-pnzT1m4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+                type: 'youtube',
+                title: "Installation & Setup Guide",
+                productName: "Tutorial",
+                thumbnail: "https://img.youtube.com/vi/0O0NtTs2vE8/maxresdefault.jpg",
+                videoEmbed: '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/0O0NtTs2vE8?si=cS3db_rCAKs57b54" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+            },
+            {
+                id: 4,
+                type: 'youtube',
+                title: "Gameplay Highlights & Skills Showcase",
+                productName: "Showcase",
+                thumbnail: "https://img.youtube.com/vi/S1lq4lzVEfA/maxresdefault.jpg",
+                videoEmbed: '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/S1lq4lzVEfA?si=24v9Ku4SzGnys3jG" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+            },
+            {
+                id: 5,
+                type: 'youtube',
+                title: "New Features & Feature Update",
+                productName: "Update",
+                thumbnail: "https://img.youtube.com/vi/w0aXFcaNDls/maxresdefault.jpg",
+                videoEmbed: '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/w0aXFcaNDls?si=N0k3DbN85ZZIMi6a" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+            },
+            {
+                id: 6,
+                type: 'youtube',
+                title: "Maximum Optimization & Performance Tips",
+                productName: "Tutorial",
+                thumbnail: "https://img.youtube.com/vi/UsA7-DnH-4A/maxresdefault.jpg",
+                videoEmbed: '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/UsA7-DnH-4A?si=YEGYn8fBFyU-4CyX" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+            },
+            {
+                id: 7,
+                type: 'youtube',
+                title: "Quick Start Tutorial for New Users",
+                productName: "Tutorial",
+                thumbnail: "https://img.youtube.com/vi/uZwX6KtgoiU/maxresdefault.jpg",
+                videoEmbed: '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/uZwX6KtgoiU?si=RPp944uSm0o_ux_q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+            },
+            {
+                id: 8,
+                type: 'youtube',
+                title: "Advanced Settings & Configuration Guide",
+                productName: "Tutorial",
+                thumbnail: "https://img.youtube.com/vi/JxDQXWJGf20/maxresdefault.jpg",
+                videoEmbed: '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/JxDQXWJGf20?si=goT0UedM4Jw0htrn" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+            },
+            {
+                id: 9,
+                type: 'youtube',
+                title: "Official BLUEWI Feature Showcase",
+                productName: "Showcase",
+                thumbnail: "https://img.youtube.com/vi/XUy-pnzT1m4/maxresdefault.jpg",
+                videoEmbed: '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/XUy-pnzT1m4?si=Tj2QseI_PV7ZLAes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
             }
         ];
 
         // ==================== PRODUCT RENDERING ====================
-        // Render Products
-        function renderProducts() {
-            productsGrid.innerHTML = '';
-            products.forEach((product, index) => {
+
+        // Navigation Logic
+        window.navigateTo = function (viewId) {
+            // Hide Home Elements
+            const homeElements = document.querySelectorAll('.home-view-element');
+            homeElements.forEach(el => el.style.display = 'none');
+
+            // Hide All Views
+            const views = document.querySelectorAll('.view-section');
+            views.forEach(v => v.classList.remove('active'));
+
+            if (viewId === 'home') {
+                homeElements.forEach(el => el.style.display = 'block');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+
+            if (viewId === 'about') {
+                homeElements.forEach(el => el.style.display = 'block');
+                const aboutSection = document.getElementById('about');
+                if (aboutSection) {
+                    window.scrollTo({ top: aboutSection.offsetTop - 100, behavior: 'smooth' });
+                }
+                return;
+            }
+
+            // Show Target View
+            const target = document.getElementById('view-' + viewId);
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // Initialize specific views
+                if (viewId === 'panels') renderProducts('panels');
+                if (viewId === 'videos') renderVideos();
+                if (viewId === 'editing') renderProducts('editing');
+                if (viewId === 'clothes') renderProducts('clothes');
+                if (viewId === 'emulators') renderProducts('emulators');
+                if (viewId === 'community') {
+                    // Community Hub uses static content for now
+                    console.log('Community Hub initialized');
+                }
+                if (viewId === 'blog') {
+                    // Blog uses static content for now
+                    console.log('Insights initialized');
+                }
+                if (viewId === 'inbox') {
+                    renderConversations();
+                    console.log('Hornet Inbox initialized');
+                }
+            }
+        };
+
+        // ==================== BLOG / INSIGHTS SYSTEM ====================
+        const blogArticles = {
+            ctbhm: {
+                title: "Building CTBHM: From Pressure to Identity",
+                subtitle: "The journey of a Moroccan street-wear brand",
+                date: "Dec 20, 2023",
+                category: "GROWTH STORY",
+                image: "images/ctbhm_story.png",
+                content: `
+                    <p>In the bustling streets of a Moroccan city, where the sounds of vendors haggling mix with the rhythm of traditional gnawa music and the scent of spices hangs heavy in the air, lived a young man named Amin. Amin wasn't on the conventional path. He had dropped out of school early, had no startup capital, and lacked a network of influential connections. He bounced between odd jobs, scraping by, but inside his mind, a storm was brewing. Art, design, music, street culture, and the deep-rooted Moroccan identity clashed endlessly, with no outlet. It was a pressure building up—like a volcano ready to erupt. He felt suffocated, trapped in a system that didn't have a place for someone like him.</p>
+                    
+                    <p>One restless night, sitting in a dimly lit room with just a single bulb flickering overhead, Amin sketched a simple symbol: a golden hornet. Small, unassuming, but deadly when it strikes. The Gold Hornet—it mirrored him perfectly. Weak on the surface, but fierce underneath. In that moment, CTBHM was born. It wasn't meant to be just a clothing brand; it was a statement, a mindset, a voice for those who couldn't find their spot in the world.</p>
+                    
+                    <p>The beginning was rough. Amin's first designs, inspired by big international brands, didn't sell. They were chaotic, imitative. He was copying without realizing it, chasing what he thought the market wanted. Failure after failure piled up, doubts gnawed at him through sleepless nights. There was no applause, no big support system—just him, experimenting alone. He taught himself design tools like Canva, created content, thought digitally. Each small skill was a brick in the foundation, but progress was slow and silent.</p>
+                    
+                    <p>Then came the turning point. One day, Amin paused and asked himself the hard question: "Do I want to please the market, or build something that lasts?" From there, everything shifted. His designs grew bolder, clearer, more authentic. He wove in Moroccan art, ancient symbols, the shadows and lights of the medina streets, the raw energy of urban life. Arabic script blended with graffiti, earthy tones met golden accents for the hornet. CTBHM stopped being about the market—it became an expression of him, of Moroccan youth searching for identity in a fast-changing world.</p>
+                    
+                    <p>He built in silence: trials and errors, late nights, self-doubt turning into resolve. No investors, no viral campaigns—just persistence. Every fallback was a lesson, every redo a step forward. CTBHM grew steadily, brick by brick, not with fanfare but with quiet strength.</p>
+                    
+                    <p>The real lesson? A brand doesn't start on Instagram; it starts in your head. If you don't know who you are, no one else will. Today, CTBHM isn't just tees or hoodies—it's a strong identity, a clear idea, an open road ahead. The golden hornet buzzes stronger now, striking in the world of Moroccan streetwear. Amin knows it's not at the top yet, and that's the best part. The work continues.</p>
+                    
+                    <p>This isn't a polished success tale. It's a story of ongoing construction—from pressure to freedom, from doubt to endurance. CTBHM was built to endure, not to flash and fade. And this is just the beginning.</p>
+                `
+            },
+            panels: {
+                title: "From Shadows to Screens: Building DigiBuzz",
+                subtitle: "A Journey in Digital Signage & Panel Business",
+                date: "Dec 15, 2023",
+                category: "BUSINESS TIPS",
+                image: "images/panels_story.png",
+                content: `
+                    <p>In the vibrant chaos of Casablanca's bustling markets, where neon lights flicker against ancient walls and the call to prayer echoes over honking taxis, lived a young entrepreneur named Karim. Karim wasn't born into business; he came from a family of artisans, crafting traditional zellige tiles by hand. But the world was changing fast—digital waves crashing over the old ways. He saw it everywhere: static billboards fading under the sun, shop windows cluttered with paper signs that no one noticed. Karim felt the pressure, the same suffocating itch that pushes dreamers to act.</p>
+
+                    <p>One humid evening, as the sun dipped below the horizon, Karim sketched his first idea: a digital panel that could change messages in real-time, blending Moroccan motifs with modern ads. He called it DigiBuzz—a nod to the buzzing energy of the streets and the hornet-like sting of innovation. It wasn't just about screens; it was about stories that moved, messages that adapted, a bridge between tradition and tech.</p>
+
+                    <p>The start was brutal. Karim's prototype—a repurposed TV hooked to a basic computer—failed spectacularly at his first demo for a small café. Doubts crept in like evening shadows. Sleepless nights followed, teaching himself software like content management systems, experimenting with free tools, and failing over and over. But he persisted in his tiny workshop filled with tangled cables and glowing screens.</p>
+
+                    <p>Then came the pivot. Karim asked himself: "Am I chasing trends, or creating something that resonates?" He shifted focus to authenticity, infusing designs with Moroccan geometric patterns and colors from the souks. His panels didn't just display ads; they told stories. The first real client saw sales spike, and word spread like wildfire.</p>
+
+                    <h3 style="color:var(--primary); margin: 30px 0 15px;">Panel Business: Expert Tips for Newcomers</h3>
+                    <p>Starting a digital signage business can be a lucrative venture, but it requires strategy. Here are expert tips to help you navigate from setup to growth:</p>
+                    
+                    <ul style="margin-left: 20px; list-style-type: decimal;">
+                        <li style="margin-bottom:15px;"><strong>Define Your Goals and Audience First:</strong> Clarify what you aim to achieve. Target retail stores, offices, or events based on specific client needs like boosting foot traffic.</li>
+                        <li style="margin-bottom:15px;"><strong>Choose the Right Hardware and Software:</strong> Use commercial-grade LED screens, not consumer TVs. Pair them with cloud-based CMS for remote updates and analytics.</li>
+                        <li style="margin-bottom:15px;"><strong>Master Content Creation:</strong> Content is king. Keep it simple, use motion, and aim for 7-10 seconds per message. Tell concise stories that hold attention.</li>
+                        <li style="margin-bottom:15px;"><strong>Optimize Placement and Design:</strong> Position panels at eye level in high-traffic areas. Use bold fonts and contrasting colors for impact.</li>
+                        <li style="margin-bottom:15px;"><strong>Focus on Management and Scaling:</strong> Use automation for scheduling. Track metrics to refine strategies. Start local and expand regionally with maintenance packages.</li>
+                        <li style="margin-bottom:15px;"><strong>Legal and Compliance:</strong> Ensure compliance with local energy standards and ad permits. Land bigger clients by networking at industry events.</li>
+                    </ul>
+
+                    <p style="margin-top:20px;">DigiBuzz is now climbing toward national expansion with AI-driven content. Karim built it to endure, proving that the boldest lights often come from the shadows.</p>
+                `
+            },
+            editing: {
+                title: "Behind the Scenes: Editing Secrets",
+                subtitle: "The Pro Workflow of THE HORNETS",
+                date: "Dec 10, 2023",
+                category: "BEHIND THE SCENES",
+                image: "images/editing_story.png",
+                content: `
+                    <p>In the heart of THE HORNETS' creative hive, visuals aren't just images—they're statements. They're the sting that captures attention in a crowded digital landscape. What turns a raw photo into that standout piece? It's our meticulously honed editing workflow.</p>
+
+                    <h4 style="color:var(--primary); margin: 25px 0 10px;">Step 1: The Raw Capture</h4>
+                    <p>Every great edit begins with intention. We approach visuals with a clear vision: bold, authentic, and rooted in street culture. Pro Tip: Plan your layers from the start. Capture elements separately to save hours in post-production.</p>
+
+                    <h4 style="color:var(--primary); margin: 25px 0 10px;">Step 2: Import and Organize</h4>
+                    <p>Organization is the foundation of efficiency. We use batch processing to match our warm, earthy palette (terracotta reds and desert golds) across entire series, cutting editing time by 50%.</p>
+
+                    <h4 style="color:var(--primary); margin: 25px 0 10px;">Step 3: Core Editing - Sculpting the Story</h4>
+                    <p>This is where we build depth. We use signature color grading—deep shadows contrasting with vibrant accents—to ensure every visual tells our story of resilience. We keep textures real; authenticity is our edge.</p>
+
+                    <h4 style="color:var(--primary); margin: 25px 0 10px;">Step 4: Advanced Effects</h4>
+                    <p>What elevates our visuals? Subtle effects like parallax motion for reels and AI-assisted isolating for subjects. But the human touch always reigns; we refine what AI suggests.</p>
+
+                    <h4 style="color:var(--primary); margin: 25px 0 10px;">Step 5: Export and Optimize</h4>
+                    <p>The final buzz: Exporting for impact. We optimize every file for its specific platform—high-res for prints and web-ready for social media, ensuring our golds shine brightest on every screen.</p>
+
+                    <p style="margin-top:30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top:20px;"><em>"Editing isn't mechanical; it's an extension of our philosophy. We edit to empower, reflecting the underdog's strike—small but fierce."</em></p>
+                `
+            }
+        };
+
+        function openBlogArticle(id) {
+            const article = blogArticles[id];
+            if (!article) return;
+
+            const modal = document.getElementById('blogModal');
+            const loading = document.getElementById('blogDetailLoading');
+            const content = document.getElementById('blogDetailContent');
+
+            if (!modal || !loading || !content) return;
+
+            loading.style.display = 'block';
+            content.style.display = 'none';
+            modal.style.display = 'flex';
+
+            setTimeout(() => {
+                content.innerHTML = `
+                    <div style="width: 100%; height: 400px; background: url('${article.image}') center/cover; position: relative;">
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 40px; background: linear-gradient(to top, #0f172a, transparent);">
+                            <div style="display: inline-block; background: var(--primary); color: black; padding: 5px 15px; border-radius: 20px; font-weight: 800; font-size: 0.8rem; margin-bottom: 15px;">${article.category}</div>
+                            <h2 style="font-size: 2.5rem; color: white; margin-bottom: 10px; font-family: 'Outfit', sans-serif;">${article.title}</h2>
+                            <div style="display: flex; align-items: center; gap: 20px; color: rgba(255,255,255,0.6); font-size: 0.9rem;">
+                                <span><i class="far fa-calendar-alt"></i> ${article.date}</span>
+                                <span><i class="far fa-user"></i> By Amin (THE HORNETS)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding: 40px; color: rgba(255,255,255,0.8); line-height: 1.8; font-size: 1.1rem;">
+                        ${article.content}
+                        <div style="margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: center;">
+                            <button class="btn btn-secondary" onclick="closeBlogModalFunc()">Close Article</button>
+                        </div>
+                    </div>
+                `;
+                loading.style.display = 'none';
+                content.style.display = 'block';
+            }, 600);
+        }
+
+        function closeBlogModalFunc() {
+            const modal = document.getElementById('blogModal');
+            if (modal) modal.style.display = 'none';
+        }
+
+        // Initialize modal listeners
+        window.addEventListener('DOMContentLoaded', () => {
+            const closeBlogBtn = document.getElementById('closeBlogModal');
+            if (closeBlogBtn) closeBlogBtn.addEventListener('click', closeBlogModalFunc);
+
+            window.addEventListener('click', (e) => {
+                const modal = document.getElementById('blogModal');
+                if (e.target === modal) {
+                    closeBlogModalFunc();
+                }
+            });
+        });
+
+        // Render Products (General)
+        function renderProducts(category = 'panels') {
+            let gridId = 'panels-grid';
+            if (category === 'editing') gridId = 'editing-grid';
+            if (category === 'clothes') gridId = 'clothes-grid';
+            if (category === 'emulators') gridId = 'emulators-grid';
+
+            const grid = document.getElementById(gridId);
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            const filtered = products.filter(p => !category || p.category === category);
+
+            filtered.forEach((product, index) => {
                 const isLiked = userLikes.has(product.id);
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
@@ -4714,10 +6761,396 @@
                         </div>
                     </div>
                 `;
-                productsGrid.appendChild(productCard);
+                grid.appendChild(productCard);
             });
 
-            // Re-bind listeners for newly rendered buttons
+            // Re-bind listeners
+            bindProductListeners();
+        }
+
+        // Render Videos
+        function renderVideos() {
+            console.log('DEBUG: Starting renderVideos');
+            const grid = document.getElementById('videos-grid');
+            if (!grid) {
+                console.error('DEBUG: Videos Grid #videos-grid not found');
+                return;
+            }
+            grid.innerHTML = '';
+
+            const videos = window.productVideos || [];
+            console.log('DEBUG: Video count:', videos.length);
+
+            if (videos.length === 0) {
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:40px; font-size:1.2rem;">No videos data found.</div>';
+                return;
+            }
+
+            videos.forEach((video, index) => {
+                const item = document.createElement('div');
+                item.className = 'video-card';
+                item.style.background = 'rgba(255,255,255,0.05)';
+                item.style.borderRadius = '20px';
+                item.style.overflow = 'hidden';
+                item.style.border = '1px solid rgba(255,255,255,0.1)';
+                item.style.transition = 'transform 0.3s ease, border-color 0.3s ease';
+                item.style.cursor = 'pointer';
+
+                // Handle TikTok specific styling
+                const isTikTok = video.type === 'tiktok';
+                const paddingBottom = isTikTok ? '177%' : '56.25%';
+
+                item.innerHTML = `
+                    <div class="video-thumbnail-container" style="position:relative; width:100%; padding-bottom:${paddingBottom}; height:0; background:#000;">
+                        <img src="${video.thumbnail}" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0.8; transition: opacity 0.3s;">
+                        <div class="play-btn-overlay" style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:60px; height:60px; background:var(--primary); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#000; font-size:1.5rem; transition: transform 0.3s, background 0.3s; z-index:2;">
+                            <i class="fas fa-play" style="margin-left: 5px;"></i>
+                        </div>
+                    </div>
+                    <div class="video-info" style="padding:20px; background: linear-gradient(to bottom, rgba(255,255,255,0.02), transparent);">
+                        <h4 style="color:#fff; margin-bottom:8px; font-size:1.15rem; font-weight:600; font-family:'Outfit', sans-serif;">${video.title}</h4>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <span style="font-size:0.85rem; color:var(--primary); text-transform:uppercase; letter-spacing:1px; font-weight:700;">${video.productName}</span>
+                            <span style="width:4px; height:4px; border-radius:50%; background:rgba(255,255,255,0.3);"></span>
+                            <span style="font-size:0.8rem; color:rgba(255,255,255,0.5);">${video.type.toUpperCase()}</span>
+                        </div>
+                    </div>
+                `;
+
+                // Hover Effects
+                item.onmouseenter = () => {
+                    item.style.transform = 'translateY(-10px)';
+                    item.style.borderColor = 'var(--primary)';
+                    item.querySelector('img').style.opacity = '1';
+                    item.querySelector('.play-btn-overlay').style.transform = 'translate(-50%, -50%) scale(1.1)';
+                };
+                item.onmouseleave = () => {
+                    item.style.transform = 'translateY(0)';
+                    item.style.borderColor = 'rgba(255,255,255,0.1)';
+                    item.querySelector('img').style.opacity = '0.8';
+                    item.querySelector('.play-btn-overlay').style.transform = 'translate(-50%, -50%) scale(1)';
+                };
+
+                // Click to Play
+                item.onclick = () => {
+                    const container = item.querySelector('.video-thumbnail-container');
+                    container.innerHTML = `<div style="position:absolute; top:0; left:0; width:100%; height:100%;">${video.videoEmbed}</div>`;
+                };
+
+                grid.appendChild(item);
+            });
+
+            // Ensure TikTok script is loaded if needed
+            if (videos.some(v => v.type === 'tiktok') && !window.tiktokScriptLoaded) {
+                const script = document.createElement('script');
+                script.src = "https://www.tiktok.com/embed.js";
+                script.async = true;
+                document.body.appendChild(script);
+                window.tiktokScriptLoaded = true;
+            }
+            console.log('DEBUG: renderVideos complete');
+        }
+        // ==================== HORNET INBOX & SOCIAL CORE ====================
+        const conversations = [
+            { id: 1, name: "Amin (Founder)", avatar: "images/about_me.jpg", lastMsg: "Hey! How can I help with your project?", time: "2:30 PM", unread: 1, online: true, role: 'admin', type: 'direct' },
+            { id: 2, name: "Karim (Edit Pro)", avatar: "images/panels_story.png", lastMsg: "The new UI designs are ready for review.", time: "Yesterday", unread: 0, online: true, role: 'member', type: 'direct' },
+            { id: 3, name: "Hornet #general (Group)", avatar: "images/logo_hornet.png", lastMsg: "User123: Has anyone tried the new panel?", time: "10:15 AM", unread: 5, online: false, type: 'group' },
+            { id: 4, name: "Anonymous User", avatar: "images/logo_hornet.png", lastMsg: "Is your panel compatible with Win 11?", time: "2 days ago", unread: 1, online: false, role: 'member', type: 'request' }
+        ];
+
+        const chatData = {
+            1: [
+                { id: 101, sender: "received", text: "Welcome to The Hornets! I'm Amin.", time: "2:00 PM", status: 'seen' },
+                { id: 102, sender: "received", text: "Hey! How can I help with your project?", time: "2:30 PM", status: 'seen' }
+            ],
+            2: [
+                { id: 201, sender: "received", text: "I finished the color grading for your tutorial.", time: "Monday", status: 'seen' },
+                { id: 202, sender: "sent", text: "Awesome, can you send the preview?", time: "Monday", status: 'seen' },
+                { id: 203, sender: "received", text: "The new UI designs are ready for review.", time: "Yesterday", status: 'seen' }
+            ],
+            3: [
+                { id: 301, sender: "received", user: "Admin", text: "Welcome to the general discussion room!", time: "9:00 AM", status: 'seen' },
+                { id: 302, sender: "received", user: "User123", text: "Has anyone tried the new panel?", time: "10:15 AM", status: 'seen', reactions: [{ emoji: "🔥", count: 3, me: false }] },
+                { id: 303, sender: "received", user: "Amin", type: "image", url: "images/hornet_inbox_social.jpg", text: "Our new Social Hub is officially live! 🐝", time: "11:00 AM", status: 'seen' },
+                { id: 304, sender: "received", user: "System", type: "poll", question: "What is your favorite Hornet feature?", options: [{ text: "Panels", votes: 60 }, { text: "Editing", votes: 20 }, { text: "Community", votes: 20 }], time: "11:05 AM", status: 'seen' }
+            ],
+            4: [
+                { id: 401, sender: "received", text: "Is your panel compatible with Win 11?", time: "2 days ago", status: 'delivered' }
+            ]
+        };
+
+        let activeConversationId = null;
+        let currentInboxTab = 'all';
+
+        function renderConversations() {
+            const list = document.getElementById('conversationList');
+            if (!list) return;
+            list.innerHTML = '';
+
+            const filtered = conversations.filter(c => {
+                if (currentInboxTab === 'all') return c.type !== 'request';
+                return c.type === currentInboxTab;
+            });
+
+            filtered.forEach(conv => {
+                const item = document.createElement('div');
+                item.className = `conv-item ${activeConversationId === conv.id ? 'active' : ''}`;
+                item.onclick = () => openConversation(conv.id);
+
+                item.innerHTML = `
+                    <div style="position:relative;">
+                        <img src="${conv.avatar}" alt="${conv.name}" class="conv-avatar">
+                        ${conv.online ? '<div style="position:absolute; bottom:2px; right:2px; width:12px; height:12px; background:#2ecc71; border:2px solid #0f172a; border-radius:50%;"></div>' : ''}
+                    </div>
+                    <div class="conv-info">
+                        <div class="conv-name-row">
+                            <span class="conv-name">${conv.name}</span>
+                            <span class="conv-time">${conv.time}</span>
+                        </div>
+                        <div class="conv-snippet">${conv.lastMsg}</div>
+                    </div>
+                    ${conv.unread > 0 ? `<span class="unread-badge">${conv.unread}</span>` : ''}
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function switchInboxTab(tab, el) {
+            currentInboxTab = tab;
+            document.querySelectorAll('.inbox-tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            renderConversations();
+        }
+
+        function searchInbox() {
+            const query = document.getElementById('inboxSearch').value.toLowerCase();
+            const list = document.getElementById('conversationList');
+            if (!list) return;
+
+            const items = list.getElementsByClassName('conv-item');
+            Array.from(items).forEach(item => {
+                const name = item.querySelector('.conv-name').innerText.toLowerCase();
+                const snippet = item.querySelector('.conv-snippet').innerText.toLowerCase();
+                if (name.includes(query) || snippet.includes(query)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function openConversation(id) {
+            if (!checkAuth()) return;
+            activeConversationId = id;
+            const conv = conversations.find(c => c.id === id);
+            conv.unread = 0;
+
+            document.getElementById('emptyChat').style.display = 'none';
+            document.getElementById('activeChat').style.display = 'flex';
+            document.getElementById('activeChatName').innerText = conv.name;
+            document.getElementById('activeChatAvatar').src = conv.avatar;
+
+            // Updated meta tags
+            const roleBadge = document.getElementById('activeChatRole');
+            if (conv.role) {
+                roleBadge.className = `user-role-badge role-${conv.role}`;
+                roleBadge.innerText = conv.role;
+                roleBadge.style.display = 'block';
+            } else { roleBadge.style.display = 'none'; }
+
+            const statusText = document.getElementById('activeChatStatus');
+            if (conv.online) {
+                statusText.innerHTML = '<i class="fas fa-circle" style="font-size: 0.6rem;"></i> Online';
+                statusText.style.color = '#2ecc71';
+            } else {
+                statusText.innerHTML = '<i class="fas fa-circle" style="font-size: 0.6rem;"></i> Last seen 2h ago';
+                statusText.style.color = 'var(--gray)';
+            }
+
+            renderMessages(id);
+            renderConversations();
+            const msgContainer = document.getElementById('chatMessages');
+            setTimeout(() => { msgContainer.scrollTop = msgContainer.scrollHeight; }, 50);
+        }
+
+        function renderMessages(id) {
+            const msgContainer = document.getElementById('chatMessages');
+            msgContainer.innerHTML = '';
+            const messages = chatData[id] || [];
+
+            messages.forEach((msg, index) => {
+                const bubble = document.createElement('div');
+                bubble.className = `msg-bubble msg-${msg.sender}`;
+
+                const actionsHtml = `
+                    <div class="msg-actions">
+                        <i class="fas fa-reply msg-action-btn" title="Reply" onclick="socialAction('reply', ${id}, ${index})"></i>
+                        <i class="fas fa-retweet msg-action-btn" title="Repost" onclick="socialAction('repost', ${id}, ${index})"></i>
+                        <i class="fas fa-thumbs-up msg-action-btn" title="Like" onclick="socialAction('like', ${id}, ${index})"></i>
+                    </div>
+                `;
+
+                let userLabel = msg.user ? `<div style="font-size: 0.75rem; font-weight: 800; color: var(--primary); margin-bottom: 5px;">${msg.user}</div>` : '';
+
+                let mediaHtml = '';
+                if (msg.type === 'image') mediaHtml = `<img src="${msg.url}" class="media-preview" onclick="window.open('${msg.url}')">`;
+                else if (msg.type === 'video') mediaHtml = `<div class="media-preview" style="background:#000; height:180px; display:flex; align-items:center; justify-content:center;"><i class="fas fa-play-circle" style="font-size: 3rem;"></i></div>`;
+                else if (msg.type === 'document') mediaHtml = `<div class="doc-item"><i class="fas fa-file-pdf doc-icon"></i><div><div>${msg.fileName}</div><div style="font-size:0.75rem; opacity:0.6;">${msg.fileSize}</div></div></div>`;
+
+                let pollHtml = '';
+                if (msg.type === 'poll') {
+                    pollHtml = `<div class="poll-container"><h4 style="margin-bottom:10px;">${msg.question}</h4>${msg.options.map((opt, i) => `
+                        <div class="poll-option ${msg.voted === i ? 'selected' : ''}" onclick="votePoll(${id}, ${index}, ${i})"><span>${opt.text}</span><span>${opt.votes}%</span></div>
+                        <div class="poll-progress"><div class="poll-fill" style="width: ${opt.votes}%"></div></div>`).join('')}</div>`;
+                }
+
+                const statusIcon = msg.sender === 'sent' ? `
+                    <span class="msg-status ${msg.status === 'seen' ? 'seen' : ''}">
+                        <i class="fas ${msg.status === 'seen' ? 'fa-check-double' : (msg.status === 'delivered' ? 'fa-check-double' : 'fa-check')}"></i>
+                    </span>
+                ` : '';
+
+                let reactionsHtml = msg.reactions ? `<div class="reactions-bar">${msg.reactions.map(r => `<span class="reaction-item ${r.me ? 'active' : ''}" onclick="reactToMsg(${id}, ${index}, '${r.emoji}')">${r.emoji} ${r.count}</span>`).join('')}</div>` : '';
+
+                bubble.innerHTML = `
+                    ${actionsHtml}
+                    ${userLabel}
+                    <div>${msg.text || ''}</div>
+                    ${mediaHtml}${pollHtml}
+                    <div style="display:flex; justify-content:flex-end; align-items:center; margin-top:5px;">
+                        <span class="msg-time">${msg.time}</span>
+                        ${statusIcon}
+                    </div>
+                    ${reactionsHtml}
+                `;
+                msgContainer.appendChild(bubble);
+            });
+        }
+
+        // --- Social & Interaction Logic ---
+        function toggleChatOptions() { document.getElementById('chatOptionsDropdown').classList.toggle('active'); }
+        window.addEventListener('click', (e) => { if (!e.target.closest('.chat-options-menu')) document.getElementById('chatOptionsDropdown').classList.remove('active'); });
+
+        function socialAction(action, convId, msgIdx) {
+            const msg = chatData[convId][msgIdx];
+            if (action === 'like') showToast('Liked message', 'success');
+            else if (action === 'repost') {
+                sendMessage(`Reposted: ${msg.text}`);
+                showToast('Message reposted', 'success');
+            } else if (action === 'reply') {
+                document.getElementById('messageInput').value = `Reply: "${msg.text.substring(0, 25)}..." `;
+                document.getElementById('messageInput').focus();
+            }
+        }
+
+        function reactToMsg(convId, msgIdx, emoji) {
+            const msg = chatData[convId][msgIdx];
+            if (!msg.reactions) msg.reactions = [];
+            let r = msg.reactions.find(x => x.emoji === emoji);
+            if (r) { r.count = r.me ? r.count - 1 : r.count + 1; r.me = !r.me; if (r.count === 0) msg.reactions = msg.reactions.filter(x => x.emoji !== emoji); }
+            else msg.reactions.push({ emoji, count: 1, me: true });
+            renderMessages(convId);
+        }
+
+        function votePoll(convId, msgIdx, optIdx) {
+            const msg = chatData[convId][msgIdx];
+            if (msg.voted !== undefined) return;
+            msg.voted = optIdx;
+            msg.options.forEach((o, i) => { if (i === optIdx) o.votes += 10; else o.votes = Math.max(0, o.votes - 1); });
+            renderMessages(convId);
+        }
+
+        function simulateFileUpload(type) {
+            const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            let m = { sender: 'sent', time: now, type, status: 'sent' };
+            if (type === 'image') { m.url = 'images/hornet_inbox_social.jpg'; m.text = 'New Shared Graphic'; }
+            else if (type === 'document') { m.fileName = 'Hornet_Report.pdf'; m.fileSize = '1.2 MB'; }
+            chatData[activeConversationId].push(m);
+            renderMessages(activeConversationId);
+            setTimeout(() => { m.status = 'delivered'; renderMessages(activeConversationId); }, 1500);
+            setTimeout(() => { m.status = 'seen'; renderMessages(activeConversationId); }, 3500);
+        }
+
+        function showPollCreator() {
+            const q = prompt("Question?"); if (!q) return;
+            chatData[activeConversationId].push({ sender: 'sent', time: 'Just now', type: 'poll', question: q, options: [{ text: 'Yes', votes: 50 }, { text: 'No', votes: 20 }], status: 'sent' });
+            renderMessages(activeConversationId);
+        }
+
+        function toggleEmojiPicker() {
+            const i = chatData[activeConversationId].findLastIndex(x => x.sender === 'received');
+            if (i !== -1) reactToMsg(activeConversationId, i, '🔥');
+        }
+
+        function sendMessage(customText = null) {
+            const input = document.getElementById('messageInput');
+            const text = customText || input.value.trim();
+            if (!text || !activeConversationId) return;
+
+            const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const m = { id: Date.now(), sender: 'sent', text, time: now, status: 'sent' };
+
+            chatData[activeConversationId].push(m);
+            const c = conversations.find(x => x.id === activeConversationId);
+            c.lastMsg = text; c.time = now;
+
+            if (!customText) input.value = '';
+            renderMessages(activeConversationId);
+            renderConversations();
+
+            setTimeout(() => { m.status = 'delivered'; renderMessages(activeConversationId); }, 1000);
+            setTimeout(() => { m.status = 'seen'; renderMessages(activeConversationId); }, 3000);
+
+            if (activeConversationId === 1) {
+                setTimeout(() => {
+                    chatData[1].push({ sender: 'received', text: 'Thank you for reaching out! I will look into your request immediately.', time: 'Just now', status: 'seen' });
+                    renderMessages(1);
+                    showToast('Amin is available', 'info');
+                }, 5000);
+            }
+            const container = document.getElementById('chatMessages');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function startNewChat() { showToast('Search people to start a chat!', 'info'); document.getElementById('inboxSearch').focus(); }
+
+        // Category-Linked Chats Helper
+        window.startCategoryChat = function (category) {
+            if (!checkAuth()) return;
+            navigateTo('inbox');
+            openConversation(1);
+            sendMessage(`I'm interested in information regarding [${category.toUpperCase()}]. `);
+            showToast(`Started conversation about ${category}`, 'success');
+        };
+
+        // Events
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && document.activeElement.id === 'messageInput') sendMessage();
+        });
+
+        // Handle Enter key in chat
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && document.activeElement.id === 'messageInput') {
+                sendMessage();
+            }
+        });
+
+        function startNewChat() {
+            showToast('Search for players or admins to start a chat!', 'info');
+            document.getElementById('inboxSearch').focus();
+        }
+
+
+        function checkAuth() {
+            if (!isLoggedIn) {
+                showToast('Please sign up or login to continue.', 'info');
+                authModal.classList.add('active');
+                return false;
+            }
+            return true;
+        }
+
+        function bindProductListeners() {
             document.querySelectorAll('.view-product').forEach(button => {
                 button.addEventListener('click', (e) => {
                     const productId = parseInt(e.target.getAttribute('data-id'));
@@ -4727,12 +7160,14 @@
 
             document.querySelectorAll('.add-to-cart').forEach(button => {
                 button.addEventListener('click', (e) => {
+                    if (!checkAuth()) return;
                     const productId = parseInt(e.target.getAttribute('data-id'));
                     const product = products.find(p => p.id === productId);
-                    cart.addItem(product);
+                    if (cart && cart.addItem) cart.addItem(product);
                 });
             });
         }
+
 
         // View Product Details
         function viewProduct(productId) {
@@ -4802,6 +7237,7 @@
 
         // Like/Unlike Product
         function toggleLike(productId, el, updateModal = false) {
+            if (!checkAuth()) return;
             const product = products.find(p => p.id === productId);
             if (!userLikes.has(productId)) {
                 userLikes.add(productId);
@@ -4822,6 +7258,7 @@
 
         // Submit Review
         function submitReview(productId) {
+            if (!checkAuth()) return;
             const comment = document.getElementById('reviewComment').value.trim();
             const ratingEl = document.querySelector('input[name="rating"]:checked');
 
@@ -4846,6 +7283,7 @@
 
         // Add to cart from modal
         function addToCartFromModal(productId) {
+            if (!checkAuth()) return;
             const product = products.find(p => p.id === productId);
             cart.addItem(product);
             productModal.classList.remove('active');
@@ -4853,6 +7291,7 @@
 
         // Buy now - add to cart and go to checkout
         function buyNow(productId) {
+            if (!checkAuth()) return;
             const product = products.find(p => p.id === productId);
             cart.addItem(product);
             productModal.classList.remove('active');
@@ -5157,6 +7596,7 @@
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const email = e.target.querySelector('input[type="email"]').value;
+            isLoggedIn = true;
             showToast(`Welcome back! Logged in as ${email}`, 'success');
             authModal.classList.remove('active');
             e.target.reset();
@@ -5172,6 +7612,7 @@
                 return;
             }
 
+            isLoggedIn = true;
             showToast(`Account created successfully! Welcome ${name}!`, 'success');
             authModal.classList.remove('active');
             e.target.reset();
@@ -5566,48 +8007,7 @@
 
 
 
-        // ==================== VIDEO RENDERING ====================
-        // ==================== VIDEO RENDERING ====================
-        function renderVideos() {
-            const videosGrid = document.getElementById('videosGrid');
-            videosGrid.innerHTML = '';
 
-            productVideos.forEach((video, index) => {
-                const videoCard = document.createElement('div');
-                videoCard.className = 'video-card';
-                // Set custom property for staggered delay
-                videoCard.style.setProperty('--i', index);
-                videoCard.innerHTML = `
-                    <div class="video-thumbnail">
-                        <img src="${video.thumbnail}" alt="${video.title}">
-                        <div class="play-button"><i class="fas fa-play"></i></div>
-                    </div>
-                    <div class="video-info">
-                        <h4>${video.title}</h4>
-                        <p>Watch demo for ${video.productName}</p>
-                    </div>
-                `;
-
-                videoCard.addEventListener('click', () => {
-                    openVideoModal(video.videoEmbed);
-                });
-
-                videosGrid.appendChild(videoCard);
-            });
-        }
-
-        function openVideoModal(embedCode) {
-            const videoModal = document.getElementById('videoModal');
-            const container = document.getElementById('videoPlayerContainer');
-            container.innerHTML = embedCode;
-            videoModal.classList.add('active');
-        }
-
-        document.getElementById('closeVideoModal').addEventListener('click', () => {
-            document.getElementById('videoModal').classList.remove('active');
-            // Stop video by clearing content
-            document.getElementById('videoPlayerContainer').innerHTML = '';
-        });
 
         // ==================== PRO AI AGENT SYSTEM (ALEX) ====================
         function initProAgent() {
@@ -5999,13 +8399,30 @@
                 updatePageLanguage();
             }
 
+            // Load saved theme
+            const savedTheme = localStorage.getItem('hornets_theme');
+            if (savedTheme) {
+                const icon = themeToggle.querySelector('i');
+                if (savedTheme === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    document.body.classList.remove('light-mode');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    document.body.classList.add('light-mode');
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            }
+
             // Initialize all features
             renderProducts();
             renderVideos();
             initParticles();
             initBlueParticles();
             initGeometricShapes();
-            initHeartParticles();
+            // initHeartParticles(); // Keep hearts optional or off as per previous preference if they weren't explicitly called "dots"
             initFloatingDots();
             initMouseGlow();
             enhanceTabSwitching();
@@ -6018,6 +8435,44 @@
             initProAgent();
 
 
+
+            // ==================== CATEGORY CARDS NAVIGATION ====================
+            const categoryCards = document.querySelectorAll('.category-card');
+            categoryCards.forEach(card => {
+                card.addEventListener('click', function () {
+                    const category = this.getAttribute('data-category');
+
+                    // Show Notification
+                    const categoryName = this.getAttribute('data-category').toUpperCase();
+                    if (typeof showToast === 'function') {
+                        showToast(`🚀 Opening ${categoryName}...`, 'success');
+                    }
+
+                    // Navigate
+                    if (typeof navigateTo === 'function') {
+                        navigateTo(category);
+                    }
+                });
+
+                // Add mouse move tilt effect
+                card.addEventListener('mousemove', function (e) {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const rotateX = ((y - centerY) / centerY) * 5;
+                    const rotateY = ((x - centerX) / centerX) * -5;
+
+                    card.style.transform = `translateY(-20px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+                });
+
+                card.addEventListener('mouseleave', function () {
+                    card.style.transform = '';
+                });
+            });
 
             console.log('🎉 THE HORNETS - All animations loaded successfully!');
         });
@@ -6127,6 +8582,37 @@
             </div>
         </div>
     </div>
+    <script>
+        // INBOX NAVIGATION OVERRIDE
+        // This ensures clicking "Inbox" or "Social Hub" redirects to the new App
+        document.addEventListener('DOMContentLoaded', () => {
+            const originalNavigateTo = window.navigateTo;
+            window.navigateTo = function (viewId) {
+                console.log("Navigating to:", viewId);
+                // Redirect for Inbox/Messages
+                if (viewId === 'inbox' || viewId === 'social') {
+                    window.location.href = 'inbox.html';
+                    return;
+                }
+
+                // Call original function if it exists
+                if (typeof originalNavigateTo === 'function') {
+                    originalNavigateTo(viewId);
+                } else {
+                    // Fallback basic navigation
+                    const section = document.getElementById('view-' + viewId);
+                    if (section) {
+                        document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
+                        document.querySelector('.home-view-element').style.display = 'none';
+                        section.style.display = 'block';
+                        window.scrollTo(0, 0);
+                    } else {
+                        if (viewId === 'home') location.reload();
+                    }
+                }
+            };
+        });
+    </script>
 </body>
 
 </html>
