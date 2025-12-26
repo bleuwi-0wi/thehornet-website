@@ -9,8 +9,8 @@
 # EDIT THESE VARIABLES WITH YOUR INFO
 # ========================================
 
-$GITHUB_USERNAME = "YOUR-USERNAME-HERE"        # Your GitHub username
-$REPOSITORY_NAME = "YOUR-REPO-NAME-HERE"       # Your repository name
+$GITHUB_USERNAME = "bleuwi-0wi"        # Your GitHub username
+$REPOSITORY_NAME = "thehornet-website"       # Your repository name
 
 # ========================================
 # DO NOT EDIT BELOW THIS LINE
@@ -22,7 +22,7 @@ Write-Host "======================================" -ForegroundColor Cyan
 Write-Host ""
 
 # Refresh environment variables to use Git
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
 
 # Navigate to website directory
 Set-Location $PSScriptRoot
@@ -58,7 +58,8 @@ git remote add origin "https://github.com/$GITHUB_USERNAME/$REPOSITORY_NAME.git"
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "✓ Remote added successfully!" -ForegroundColor Green
-} else {
+}
+else {
     Write-Host "✗ Failed to add remote" -ForegroundColor Red
     Write-Host "Press any key to exit..."
     $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
@@ -94,7 +95,8 @@ if ($LASTEXITCODE -eq 0) {
     Write-Host "Your website will be live at:" -ForegroundColor Cyan
     Write-Host "https://$GITHUB_USERNAME.github.io/$REPOSITORY_NAME/" -ForegroundColor Yellow
     Write-Host ""
-} else {
+}
+else {
     Write-Host ""
     Write-Host "✗ Push failed. Please check your credentials and try again." -ForegroundColor Red
     Write-Host ""
