@@ -215,10 +215,11 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            background: linear-gradient(45deg, #007bff 0%, #00d4ff 25%, #7b2cbf 50%, #ff006e 75%, #007bff 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            opacity: 0.05;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(0, 31, 63, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(31, 0, 63, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at center, #001529 0%, #000814 100%);
+            opacity: 1;
         }
 
         .dark-mode body::before {
@@ -515,19 +516,15 @@
         }
 
         /* Glowing Background Overlay */
-        .glow-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-                    rgba(0, 123, 255, 0.15) 0%,
-                    transparent 50%);
+        .glow-overlay,
+        .geometric-bg,
+        .blue-particles-bg {
+            display: none !important;
+        }
+
+        #particle-canvas {
+            display: block !important;
             pointer-events: none;
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
         .glow-overlay.active {
@@ -605,6 +602,82 @@
             }
         }
 
+        /* Living Button Effect */
+        .living-btn {
+            position: relative;
+            background: linear-gradient(135deg, #007bff 0%, #00d4ff 100%);
+            color: white !important;
+            border: none !important;
+            padding: 15px 40px !important;
+            font-size: 1.1rem !important;
+            font-weight: 700 !important;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4), 0 0 40px rgba(0, 123, 255, 0.2);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+            animation: livingPulse 3s infinite ease-in-out;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .living-btn::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #007bff, #00d4ff, #7b2cbf, #00d4ff, #007bff);
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(8px);
+            border-radius: var(--border-radius);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .living-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.6), 0 0 50px rgba(0, 123, 255, 0.4);
+            letter-spacing: 2px;
+        }
+
+        .living-btn:hover::after {
+            opacity: 1;
+            animation: livingShimmer 4s linear infinite;
+        }
+
+        @keyframes livingPulse {
+            0% {
+                box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(0, 212, 255, 0.8), 0 0 60px rgba(0, 123, 255, 0.4);
+                transform: scale(1.02);
+            }
+
+            100% {
+                box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+            }
+        }
+
+        @keyframes livingShimmer {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
         /* Language & Theme Toggles */
         .language-selector,
         .theme-toggle {
@@ -662,12 +735,30 @@
 
         /* Hero Section */
         .hero {
-            padding: 180px 0 100px;
-            background: linear-gradient(135deg, var(--primary) 0%, #004085 100%);
+            padding: 220px 0 120px;
+            background: linear-gradient(135deg, rgba(0, 31, 63, 0.7) 0%, rgba(0, 64, 133, 0.4) 50%, rgba(0, 31, 63, 0.7) 100%);
             color: white;
             text-align: center;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            object-fit: cover;
+            opacity: 0.6;
         }
 
         .hero h1 {
@@ -694,12 +785,13 @@
 
         /* Particle Canvas */
         #particle-canvas {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
+            z-index: -1;
+            pointer-events: none;
         }
 
         .hero-content {
@@ -2915,14 +3007,20 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="file:///C:/Users/bluewi/Videos/ba" type="video/mp4">
+            <source src="images/ba.mp4" type="video/mp4">
+        </video>
         <div class="container hero-content">
             <h1>THE <span>HORNETS</span></h1>
             <p class="owner">Professional Services by BLUEWI</p>
             <p>Welcome to THE HORNETS - your premier destination for high-quality digital products and professional
                 services. We combine innovation with excellence to deliver exceptional results.</p>
-            <a href="#products" class="btn btn-primary" style="background-color: #ffcc00; color: #333;">View
-                Products</a>
-            <a href="#about" class="btn btn-secondary" style="border-color: #ffcc00; color: #ffcc00;">My Skills</a>
+            <div class="hero-buttons">
+                <a href="#about" class="btn living-btn" id="mySkillsLivingBtn">
+                    <i class="fas fa-brain"></i> My Skills
+                </a>
+            </div>
         </div>
     </section>
 
@@ -2963,18 +3061,10 @@
     <!-- Products & Videos Section -->
     <section class="products" id="products">
         <div class="container">
-            <h2 class="section-title">My Offers</h2>
+            <h2 class="section-title">Gameplay Highlights & Skills Showcase</h2>
 
-            <div class="section-tabs">
-                <button class="tab-btn active" data-target="productsGrid">Products</button>
-                <button class="tab-btn" data-target="videosGrid">Video Explanations</button>
-            </div>
-
-            <div class="products-grid tab-content active" id="productsGrid">
-                <!-- Products will be generated by JavaScript -->
-            </div>
-
-            <div class="videos-grid tab-content" id="videosGrid">
+            <div class="videos-grid tab-content active" id="videosGrid"
+                style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px;">
                 <!-- Videos will be generated by JavaScript -->
             </div>
         </div>
@@ -3064,7 +3154,7 @@
                         <a href="https://t.me/+cmLReZmS8fphMDY0" target="_blank" class="social-icon" title="Telegram">
                             <i class="fab fa-telegram"></i>
                         </a>
-                        <a href="mailto:contact@thehornets.com" class="social-icon" title="Email">
+                        <a href="mailto:damimehdi20@gmail.com" class="social-icon" title="Email">
                             <i class="fas fa-envelope"></i>
                         </a>
                     </div>
@@ -3115,8 +3205,8 @@
 
                 <div class="footer-contact">
                     <h4>Contact Info</h4>
-                    <p><i class="fas fa-envelope"></i> contact@thehornets.com</p>
-                    <p><i class="fas fa-phone"></i> +212 600-123456</p>
+                    <p><i class="fas fa-envelope"></i> damimehdi20@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +212 762635898</p>
                     <p><i class="fas fa-map-marker-alt"></i> Casablanca, Morocco</p>
                 </div>
             </div>
@@ -3305,7 +3395,7 @@
                                     <span style="margin-left: 10px;">Support Team: <strong>Online</strong></span>
                                 </li>
                                 <li style="margin-bottom: 15px;"><i class="fas fa-envelope"
-                                        style="color: var(--primary); margin-right: 10px;"></i> support@thehornets.com
+                                        style="color: var(--primary); margin-right: 10px;"></i> damimehdi20@gmail.com
                                 </li>
                                 <li style="margin-bottom: 15px;"><i class="fas fa-clock"
                                         style="color: var(--primary); margin-right: 10px;"></i> Response Time: ~15 mins
@@ -3441,7 +3531,7 @@
                 skillsTitle: "My Skills",
 
                 // Products
-                productsTitle: "My Products",
+                productsTitle: "Gameplay Highlights & Skills Showcase",
                 viewDetails: "View Details",
                 addToCart: "Add to Cart",
                 buyNow: "Buy Now",
@@ -4523,6 +4613,36 @@
                 price: "$40",
                 image: "images/products/product1.png",
                 likes: 1205
+            },
+            {
+                id: 10,
+                name: "BLUEWI Emulator Pro",
+                category: "emulators",
+                description: "High performance Android emulator setup.",
+                fullDescription: "Customized and optimized Android emulator configuration for professional gaming. Minimum input lag and maximum FPS guaranteed.",
+                price: "$15",
+                image: "images/emulators_bg.jpg",
+                likes: 420
+            },
+            {
+                id: 11,
+                name: "LDPlayer Hornet Edition",
+                category: "emulators",
+                description: "Specially tuned LDPlayer for Free Fire.",
+                fullDescription: "Our custom LDPlayer build with pre-configured settings for the best possible responsiveness and stability.",
+                price: "$12",
+                image: "images/emulators_bg.jpg",
+                likes: 315
+            },
+            {
+                id: 12,
+                name: "Bluestacks 5 Speed Pack",
+                category: "emulators",
+                description: "Optimization guide and registry tweaks.",
+                fullDescription: "A complete set of optimizations for Bluestacks 5, including engine tweaks and Windows registry optimizations for gaming.",
+                price: "$8",
+                image: "images/emulators_bg.jpg",
+                likes: 278
             }
         ];
 
@@ -5132,9 +5252,23 @@
         }
 
         // Initialize Particle Effect
+        // Initialize Particle Effect
         function initParticles() {
             const canvas = document.getElementById('particle-canvas');
+            if (!canvas) return;
             const ctx = canvas.getContext('2d');
+            const mouse = { x: null, y: null, radius: 150 };
+
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            });
+
+            // Handle mouse leaving window
+            window.addEventListener('mouseout', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
 
             // Set canvas size
             function resizeCanvas() {
@@ -5148,34 +5282,75 @@
             // Particle class
             class Particle {
                 constructor() {
+                    this.init();
+                }
+
+                init() {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 3 + 1;
-                    this.speedX = Math.random() * 1 - 0.5;
-                    this.speedY = Math.random() * 1 - 0.5;
-                    this.color = `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.1})`;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.baseX = this.x;
+                    this.baseY = this.y;
+                    this.density = (Math.random() * 30) + 1;
+                    this.speedX = Math.random() * 1.5 - 0.75;
+                    this.speedY = Math.random() * 1.5 - 0.75;
+                    this.color = `rgba(255, 255, 255, ${Math.random() * 0.7 + 0.3})`;
+                    // Randomly assign a star "twinkle" speed
+                    this.twinkle = Math.random() * 0.05;
+                    this.twinkleFactor = 1;
                 }
 
                 update() {
+                    // Fly logic (random movement)
                     this.x += this.speedX;
                     this.y += this.speedY;
 
-                    // Bounce off edges
-                    if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
-                    if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+                    // Wrap around edges
+                    if (this.x > canvas.width) this.x = 0;
+                    else if (this.x < 0) this.x = canvas.width;
+                    if (this.y > canvas.height) this.y = 0;
+                    else if (this.y < 0) this.y = canvas.height;
+
+                    // Mouse interaction - Push particles away
+                    if (mouse.x !== null && mouse.y !== null) {
+                        let dx = mouse.x - this.x;
+                        let dy = mouse.y - this.y;
+                        let distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < mouse.radius) {
+                            const force = (mouse.radius - distance) / mouse.radius;
+                            const directionX = (dx / distance) * force * 10;
+                            const directionY = (dy / distance) * force * 10;
+                            this.x -= directionX;
+                            this.y -= directionY;
+                        }
+                    }
+
+                    // Twinkle effect
+                    this.twinkleFactor += this.twinkle;
+                    this.opacity = (Math.sin(this.twinkleFactor) * 0.4) + 0.6;
                 }
 
                 draw() {
                     ctx.fillStyle = this.color;
+                    ctx.globalAlpha = this.opacity;
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                     ctx.fill();
+
+                    // Add a tiny glow to larger stars
+                    if (this.size > 1.5) {
+                        ctx.shadowBlur = 10;
+                        ctx.shadowColor = 'white';
+                        ctx.fill();
+                        ctx.shadowBlur = 0;
+                    }
+                    ctx.globalAlpha = 1;
                 }
             }
 
             // Create particles
             const particles = [];
-            const particleCount = 100;
+            const particleCount = 200;
 
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
@@ -5842,40 +6017,7 @@
             initLivingInterface();
             initProAgent();
 
-            // Initialize Section Tabs
-            const sectionTabs = document.querySelectorAll('.section-tabs .tab-btn');
-            sectionTabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    // Remove active from all tabs
-                    sectionTabs.forEach(t => t.classList.remove('active'));
-                    // Add active to clicked tab
-                    tab.classList.add('active');
 
-                    // Hide all contents
-                    document.querySelectorAll('.tab-content').forEach(content => {
-                        content.classList.remove('active');
-                        // Trigger reflow to restart animation next time
-                        void content.offsetWidth;
-                    });
-
-                    // Show target content
-                    const targetId = tab.getAttribute('data-target');
-                    const targetContent = document.getElementById(targetId);
-
-                    // Force restart of CSS animations by removing active class, reflow, then add back
-                    targetContent.classList.remove('active');
-                    void targetContent.offsetWidth; // Trigger reflow
-                    targetContent.classList.add('active');
-
-                    // Also explicitly reset animation for children if needed (browsers usually handle this with display:none parent toggle, but to be sure)
-                    const children = targetContent.querySelectorAll('.product-card, .video-card');
-                    children.forEach(child => {
-                        child.style.animation = 'none';
-                        child.offsetHeight; /* trigger reflow */
-                        child.style.animation = null;
-                    });
-                });
-            });
 
             console.log('🎉 THE HORNETS - All animations loaded successfully!');
         });
